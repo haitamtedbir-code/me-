@@ -15,6 +15,11 @@
   --text-main: #17181a;
   --text-body: #5f6670;
   --icon-default: #34383d;
+
+  /* Scrollbar theme */
+  --scrollbar-track: #ffffff;
+  --scrollbar-thumb: #e94343;
+  --scrollbar-thumb-hover: #b8302c;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -634,25 +639,28 @@ html { scroll-behavior: smooth; }
 /* ===================== SCROLLBAR PERSONNALISÉE ===================== */
 html {
   scrollbar-width: thin;
-  scrollbar-color: var(--accent) var(--bg);
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
+/* Vertical scrollbar - follows Light / Dark mode */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg);
+  background: var(--scrollbar-track);
+  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
+  background: var(--scrollbar-thumb);
   border-radius: 10px;
-  border: 2px solid var(--bg);
+  border: 2px solid var(--scrollbar-track);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-2);
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* ===================== PRELOADER ===================== */
@@ -894,6 +902,12 @@ body {
   color: var(--accent);
 }
 
+html.dark-mode {
+  --scrollbar-track: #121214;
+  --scrollbar-thumb: #e94343;
+  --scrollbar-thumb-hover: #b8302c;
+}
+
 body.dark-mode {
   --bg: #121214;
   --card-bg: #1c1c1e;
@@ -1060,6 +1074,13 @@ body.dark-mode .footer-socials a:hover {
   .navbar .nav-label {
     display: none;
   }
+}
+
+
+/* ===================== PAGE ZOOM ===================== */
+/* Makes the whole portfolio appear larger, like browser zoom. */
+html {
+  zoom: 1.10;
 }
 
 </style>
@@ -1445,7 +1466,10 @@ body.dark-mode .footer-socials a:hover {
 
     function applyTheme(theme) {
       const isDark = theme === 'dark';
+
+      // Apply theme to both body and html so the vertical scrollbar switches too.
       document.body.classList.toggle('dark-mode', isDark);
+      document.documentElement.classList.toggle('dark-mode', isDark);
 
       themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
       themeLabel.textContent = isDark ? 'Light' : 'Dark';
