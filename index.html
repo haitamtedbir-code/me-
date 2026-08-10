@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +7,14 @@
 <title>TEDBIR Haitam Portfolio</title>
 <style>
 :root {
-  --bg: #121214;
-  --card-bg: #1c1c1e;
-  --border: #2c2c30;
+  --bg: #ffffff;
+  --card-bg: #f8f9fb;
+  --border: #e3e5e8;
   --accent: #e94343;
   --accent-2: #b8302c;
-  --text-main: #ffffff;
-  --text-body: #a9b1bb;
-  --icon-default: #e6e6e6;
+  --text-main: #17181a;
+  --text-body: #5f6670;
+  --icon-default: #34383d;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -52,6 +52,58 @@ html { scroll-behavior: smooth; }
 
 #about .section-title span {
   color: var(--accent);
+}
+
+/* ===================== LANGUAGE SWITCHER ===================== */
+.language-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(28, 28, 30, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 14px;
+    border-radius: 999px;
+    z-index: 1500;
+}
+
+.language-switcher .divider {
+    color: var(--border);
+    font-size: 14px;
+}
+
+.language-switcher .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-body);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+}
+
+.language-switcher .flag-icon {
+    display: block;
+    border-radius: 2px;
+    object-fit: cover;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.language-switcher .lang-btn:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.language-switcher .lang-btn.active {
+    color: var(--accent);
+    background: rgba(233, 67, 67, 0.1);
 }
 
 /* ===================== ACCUEIL ===================== */
@@ -525,6 +577,7 @@ html { scroll-behavior: smooth; }
 .cert-dates { color: var(--text-body); font-size: 0.8rem; margin-bottom: 16px; }
 .cert-desc { color: var(--text-body); font-size: 0.88rem; line-height: 1.6; }
 
+
 /* ===================== NAVBAR ===================== */
 .navbar {
   position: fixed;
@@ -796,7 +849,219 @@ html {
   .navbar a { width: 38px; height: 38px; }
   .footer-grid { grid-template-columns: 1fr; gap: 34px; }
   .cta-block h2 { font-size: 1.7rem; }
+  .language-switcher { top: 12px; right: 12px; padding: 6px 10px; }
 }
+
+
+/* ===================== DARK / LIGHT MODE TOGGLE ===================== */
+
+:root {
+  --theme-shadow: rgba(20, 24, 28, 0.14);
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 205px;
+  z-index: 1500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--text-main);
+  box-shadow: 0 8px 24px var(--theme-shadow);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.theme-toggle i {
+  color: var(--accent);
+}
+
+body.dark-mode {
+  --bg: #121214;
+  --card-bg: #1c1c1e;
+  --border: #2c2c30;
+  --text-main: #ffffff;
+  --text-body: #a9b1bb;
+  --icon-default: #e6e6e6;
+  --theme-shadow: rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .language-switcher,
+body.dark-mode .navbar {
+  background: rgba(28, 28, 30, 0.65);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .language-switcher .lang-btn:hover,
+body.dark-mode .navbar a:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .profile-title {
+  color: #d7dbe0;
+}
+
+body.dark-mode .social-icons a,
+body.dark-mode .footer-socials a {
+  background: #232326;
+  border-color: transparent;
+}
+
+body.dark-mode .social-icons a:hover,
+body.dark-mode .footer-socials a:hover {
+  background-color: #b74b4b;
+  color: #000;
+  box-shadow: 0 0 20px #b74b4b;
+}
+
+@media (max-width: 600px) {
+  .theme-toggle {
+    top: 58px;
+    right: 12px;
+    padding: 7px 10px;
+  }
+}
+
+
+/* Navigation labels for FR / EN */
+.navbar a {
+  width: auto;
+  min-width: 44px;
+  padding: 0 10px;
+  gap: 7px;
+}
+
+.navbar .nav-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .navbar a {
+    width: 38px;
+    min-width: 38px;
+    padding: 0;
+  }
+
+  .navbar .nav-label {
+    display: none;
+  }
+}
+
+/* ===================== LIGHT MODE ===================== */
+/* Converted from the original dark theme while preserving the existing layout. */
+
+.language-switcher {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(20, 24, 28, 0.10);
+  box-shadow: 0 8px 24px rgba(20, 24, 28, 0.08);
+}
+
+.language-switcher .lang-btn:hover {
+  background: rgba(20, 24, 28, 0.05);
+}
+
+.profile-title {
+  color: #34383d;
+}
+
+.social-icons a,
+.footer-socials a {
+  background: #f0f1f3;
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+
+.social-icons a:hover,
+.footer-socials a:hover {
+  background-color: #f7d6d4;
+  color: #8f2220;
+  box-shadow: 0 0 20px rgba(183, 75, 75, 0.22);
+}
+
+.navbar {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(20, 24, 28, 0.10);
+  box-shadow: 0 10px 30px rgba(20, 24, 28, 0.14);
+}
+
+.navbar a:hover {
+  background: rgba(20, 24, 28, 0.06);
+}
+
+.cert-icon-cisco {
+  background: linear-gradient(135deg, #8b8d92, #5f6268);
+}
+
+.distinction-tag {
+  color: #a12e2b;
+  background: rgba(233, 67, 67, 0.10);
+}
+
+::selection {
+  background: rgba(233, 67, 67, 0.20);
+  color: var(--text-main);
+}
+
+
+/* Bilingual navigation */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.navbar .nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: auto;
+  min-width: 0;
+  padding: 9px 12px;
+  white-space: nowrap;
+}
+
+.navbar .nav-label {
+  display: inline;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    gap: 2px;
+  }
+
+  .navbar .nav-link {
+    padding: 8px;
+  }
+
+  .navbar .nav-label {
+    display: none;
+  }
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -805,31 +1070,62 @@ html {
   <!-- ============ PRELOADER ============ -->
   <div class="preloader" id="preloader">
     <div class="preloader-ring"></div>
-    <div class="preloader-label">Chargement</div>
+    <div class="preloader-label">Loading</div>
   </div>
 
-  <!-- ============ PAGE : ACCUEIL ============ -->
+  <!-- ============ LANGUAGE SWITCHER ============ -->
+  <div class="language-switcher">
+    <a href="#" class="lang-btn" id="btn-fr" title="Français" onclick="switchLanguage('fr'); return false;">
+      <svg class="flag-icon" viewBox="0 0 640 480" width="20" height="15">
+        <g fill-rule="evenodd" stroke-width="1pt">
+          <path fill="#fff" d="M0 0h640v480H0z"/>
+          <path fill="#00267f" d="M0 0h213.3v480H0z"/>
+          <path fill="#f31830" d="M426.7 0H640v480H426.7z"/>
+        </g>
+      </svg>
+      <span>FR</span>
+    </a>
+    <span class="divider">|</span>
+    <a href="#" class="lang-btn active" id="btn-en" title="English" onclick="switchLanguage('en'); return false;">
+      <svg class="flag-icon" viewBox="0 0 640 480" width="20" height="15">
+        <path fill="#00247d" d="M0 0h640v480H0z"/>
+        <path fill="#fff" d="m67 0 253 189L573 0h67v50L427 240l213 160v50h-67L320 261 107 450H0v-50l213-160L0 50V0h67z"/>
+        <path fill="#cf142b" d="M27 0l260 195h-40L0 12V0h27zm586 0L353 195h40L640 12V0h-27zM0 468l247-185h40L27 480H0v-12zm640 0L393 283h-40l260 197h27v-12z"/>
+        <path fill="#fff" d="M240 0v480h160V0H240zM0 160v160h640V160H0z"/>
+        <path fill="#cf142b" d="M280 0v480h80V0h-80zM0 200v80h640v-80H0z"/>
+      </svg>
+      <span>EN</span>
+    </a>
+  </div>
+
+
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Switch theme">
+    <i class="fa-solid fa-moon" id="themeIcon"></i>
+    <span id="themeLabel">Dark</span>
+  </button>
+
+  <!-- ============ PAGE : ACCUEIL / HOME ============ -->
   <section id="home" class="page active">
     <div class="profile">
       <div class="profile-img">
-        <img src="image/ME cv.png" alt="">
+        <img src="image/ME cv.png" alt="Profile">
         <span class="badge"><i class="fa-solid fa-shield-halved"></i></span>
       </div>
 
       <h1 class="profile-name">Haitam Tedbir</h1>
-      <h3 class="profile-title">Digital &amp; Artificial Intelligence in Healthcare Engineering</h3>
+      <h3 class="profile-title" data-i18n="hero_subtitle">Digital &amp; Artificial Intelligence in Healthcare Engineering</h3>
 
-      <p class="profile-desc">
-        I’m Haitam Tedbir, a Digital &amp; Artificial Intelligence in Healthcare Engineering
-        student. I’m passionate about technology, artificial intelligence, networking,
-        DevOps, and digital solutions. I’m continuously developing my technical and
+      <p class="profile-desc" data-i18n="hero_desc">
+        I'm Haitam Tedbir, a Digital &amp; Artificial Intelligence in Healthcare Engineering
+        student. I'm passionate about technology, artificial intelligence, networking,
+        DevOps, and digital solutions. I'm continuously developing my technical and
         professional skills through academic projects, internships, and practical
         experiences.
       </p>
 
       <div class="profile-buttons">
-        <a href="#" class="btn btn-filled"><i class="fa-solid fa-download"></i> Télécharger le CV</a>
-        <a href="mailto:haitam.tedbir@gmail.com" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Me Contacter</a>
+        <a href="#" class="btn btn-filled"><i class="fa-solid fa-download"></i> <span data-i18n="btn_cv">Download CV</span></a>
+        <a href="mailto:haitam.tedbir@gmail.com" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> <span data-i18n="btn_contact">Contact Me</span></a>
       </div>
 
       <div class="social-icons">
@@ -840,72 +1136,72 @@ html {
     </div>
   </section>
 
-  <!-- ============ PAGE : À PROPOS ============ -->
+  <!-- ============ PAGE : À PROPOS / ABOUT ============ -->
   <section id="about" class="page">
     <div class="about-heading">
-      <h1>À <span>Propos</span></h1>
+      <h1 data-i18n="about_title_1">About <span data-i18n="about_title_2">Me</span></h1>
       <div class="underline"></div>
     </div>
 
     <div class="about-grid">
       <div class="about-card">
-        <h2>Résumé Professionnel</h2>
-        <p>
-          Étudiant motivé en Génie Digital &amp; Intelligence Artificielle en Santé, je m'intéresse fortement à la technologie, au développement logiciel, au DevOps, à la virtualisation et à la cybersécurité. Mon parcours académique m'a permis de développer un esprit analytique et une réelle capacité à résoudre des problèmes complexes, tandis que mon expérience professionnelle chez Decathlon a renforcé mon leadership, mon esprit d'équipe, ma communication et mon sens du service. J'aime apprendre de nouvelles technologies, construire des projets concrets et faire évoluer continuellement mes compétences techniques.
+        <h2 data-i18n="about_summary_title">Professional Summary</h2>
+        <p data-i18n="about_summary_text">
+          Motivated student in Digital Engineering &amp; AI in Healthcare, with a strong interest in technology, software development, DevOps, virtualization, and cybersecurity. My academic journey enabled me to build strong analytical skills and a real ability to solve complex problems, while my professional experience at Decathlon strengthened my leadership, teamwork, communication, and customer service skills. I love learning new technologies, building real projects, and continuously growing my technical skills.
         </p>
       </div>
       <div class="about-card">
-        <h2>Pourquoi Travailler Avec Moi</h2>
-        <p>
-          Je possède une approche analytique et structurée, nourrie par une passion réelle pour la compréhension des systèmes complexes. J'aime creuser au-delà de la surface, relier les données, anticiper les failles. Travailler avec moi, c'est collaborer avec quelqu'un de rigoureux, curieux, et investi dans chaque projet avec une vraie exigence intellectuelle.
+        <h2 data-i18n="about_why_title">Why Work With Me</h2>
+        <p data-i18n="about_why_text">
+          I bring an analytical and structured approach, driven by a genuine passion for understanding complex systems. I enjoy going beyond the surface, connecting data, and anticipating vulnerabilities. Working with me means collaborating with someone rigorous, curious, and fully invested in every project with real intellectual standards.
         </p>
       </div>
     </div>
 
-    <h2 class="section-title">Domaines <span>d'Expertise</span></h2>
+    <h2 class="section-title"><span data-i18n="expertise_title">Areas of Expertise</span></h2>
     <div class="expertise-grid">
       <div class="expertise-card">
         <div class="expertise-icon"><i class="fa-brands fa-html5"></i></div>
         <h3>HTML</h3>
-        <p>Structuration sémantique de pages web modernes et accessibles</p>
+        <p data-i18n="skill_html">Semantic structuring of modern, accessible web pages</p>
       </div>
       <div class="expertise-card">
         <div class="expertise-icon"><i class="fa-brands fa-css3-alt"></i></div>
         <h3>CSS</h3>
-        <p>Mise en forme, responsive design et animations d'interfaces</p>
+        <p data-i18n="skill_css">Styling, responsive design, and interface animations</p>
       </div>
       <div class="expertise-card">
         <div class="expertise-icon"><i class="fa-brands fa-js"></i></div>
         <h3>JavaScript</h3>
-        <p>Développement d'interactions dynamiques côté client</p>
+        <p data-i18n="skill_js">Development of dynamic client-side interactions</p>
       </div>
       <div class="expertise-card">
         <div class="expertise-icon"><i class="fa-brands fa-python"></i></div>
         <h3>Python</h3>
-        <p>Scripts, automatisation et projets en intelligence artificielle</p>
+        <p data-i18n="skill_python">Scripts, automation, and AI projects</p>
       </div>
       <div class="expertise-card">
         <div class="expertise-icon"><i class="fa-solid fa-robot"></i></div>
-        <h3>Machine Learning</h3>
-        <p>Conception de modèles prédictifs et traitement de données</p>
+        <h3 data-i18n="skill_ml_title">Machine Learning</h3>
+        <p data-i18n="skill_ml">Designing predictive models and processing data</p>
       </div>
       <div class="expertise-card">
         <div class="expertise-icon">
           <svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="9" y="14" width="6" height="6" rx="1"/><path d="M7 10v2h10v-2M12 14v-2"/></svg>
         </div>
-        <h3>Sécurité Réseau</h3>
-        <p>Durcissement et surveillance de l'infrastructure</p>
+        <h3 data-i18n="skill_netsec_title">Network Security</h3>
+        <p data-i18n="skill_netsec">Hardening and monitoring of infrastructure</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ PAGE : EXPÉRIENCE PROFESSIONNELLE ============ -->
+  <!-- ============ PAGE : EXPÉRIENCE PROFESSIONNELLE / EXPERIENCE ============ -->
   <section id="experience" class="page">
     <div class="formation-heading">
-      <h1>Expérience <span>Professionnelle</span></h1>
+      <h1 data-i18n="exp_title">Work Experience</h1>
       <div class="underline"></div>
-      <p class="formation-subtitle">
-        Un parcours diversifié entre développement web, gestion d'équipe et support technique.
+      <p class="formation-subtitle" data-i18n="exp_subtitle">
+        A diverse background spanning web development, team management, and technical support.
       </p>
     </div>
 
@@ -914,67 +1210,67 @@ html {
         <div class="academic-top">
           <h3>IT &amp; Digital Solutions</h3>
         </div>
-        <p class="academic-meta"><span class="logo-badge"><img src="image/octicode-logo-solo.png" alt="OctiCode"></span> OctiCode · Stage · Août 2026 — Présent</p>
-        <p class="academic-place">Casablanca, Maroc</p>
+        <p class="academic-meta"><span class="logo-badge"><img src="image/octicode-logo-solo.png" alt="OctiCode"></span> OctiCode · <span data-i18n="job_internship">Internship</span> · Aug 2026 — <span data-i18n="present">Present</span></p>
+        <p class="academic-place">Casablanca, Morocco</p>
 
-        <p class="academic-label">Réalisations Clés</p>
+        <p class="academic-label" data-i18n="key_achievements">Key Achievements</p>
         <ul class="academic-activities">
-          <li>Développement de pages web responsive avec HTML5, CSS3 et JavaScript</li>
-          <li>Conception et implémentation d'interfaces utilisateur modernes et responsives</li>
-          <li>Ajout de fonctionnalités interactives et d'éléments dynamiques en JavaScript</li>
-          <li>Amélioration de la structure, du style et de l'expérience utilisateur du site</li>
-          <li>Collaboration sur des projets de développement web selon les bonnes pratiques front-end</li>
+          <li data-i18n="job1_l1">Development of responsive web pages with HTML5, CSS3, and JavaScript</li>
+          <li data-i18n="job1_l2">Design and implementation of modern, responsive user interfaces</li>
+          <li data-i18n="job1_l3">Adding interactive features and dynamic elements in JavaScript</li>
+          <li data-i18n="job1_l4">Improving the structure, style, and user experience of the site</li>
+          <li data-i18n="job1_l5">Collaborating on web development projects following front-end best practices</li>
         </ul>
       </div>
 
       <div class="academic-card">
         <div class="academic-top">
-          <h3>Store Pillar (Co-Manager)</h3>
+          <h3 data-i18n="job2_title">Store Pillar (Co-Manager)</h3>
         </div>
-        <p class="academic-meta"><span class="logo-badge"><img src="image/Decathlon-Logo.png" alt="Decathlon"></span> Decathlon · Oct 2024 — Présent</p>
-        <p class="academic-place">Mohammedia, Maroc</p>
+        <p class="academic-meta"><span class="logo-badge"><img src="image/Decathlon-Logo.png" alt="Decathlon"></span> Decathlon · Oct 2024 — <span data-i18n="present">Present</span></p>
+        <p class="academic-place">Mohammedia, Morocco</p>
 
-        <p class="academic-label">Réalisations Clés</p>
+        <p class="academic-label" data-i18n="key_achievements">Key Achievements</p>
         <ul class="academic-activities">
-          <li>Gestion d'une équipe (magasin / rayon)</li>
-          <li>Garantie de la sécurité des clients et du personnel</li>
-          <li>Suivi et analyse des performances du rayon (chiffre d'affaires, marge, rentabilité), suivi des KPIs et mise en place de plans d'action</li>
-          <li>Encadrement et formation des nouveaux membres de l'équipe (stagiaires / CDD), suivi de l'intégration et du développement des compétences</li>
-          <li>Planification et animation des temps forts commerciaux (soldes, campagnes saisonnières...)</li>
+          <li data-i18n="job2_l1">Managing a team (store / department)</li>
+          <li data-i18n="job2_l2">Ensuring the safety of customers and staff</li>
+          <li data-i18n="job2_l3">Tracking and analyzing department performance (revenue, margin, profitability), KPI monitoring, and action plans</li>
+          <li data-i18n="job2_l4">Coaching and training new team members (interns / fixed-term contracts), tracking onboarding and skills development</li>
+          <li data-i18n="job2_l5">Planning and running key commercial events (sales, seasonal campaigns...)</li>
         </ul>
       </div>
 
       <div class="academic-card">
         <div class="academic-top">
-          <h3>Video Editor &amp; Content Manager</h3>
+          <h3 data-i18n="job3_title">Video Editor &amp; Content Manager</h3>
         </div>
-        <p class="academic-meta"><span class="logo-badge"><img src="image/cultination.png" alt="Cultination"></span> Cultination · Freelance · Juin 2022 — Oct 2024</p>
-        <p class="academic-place">Remote</p>
+        <p class="academic-meta"><span class="logo-badge"><img src="image/cultination.png" alt="Cultination"></span> Cultination · <span data-i18n="job_freelance">Freelance</span> · Jun 2022 — Oct 2024</p>
+        <p class="academic-place" data-i18n="remote">Remote</p>
 
-        <p class="academic-label">Réalisations Clés</p>
+        <p class="academic-label" data-i18n="key_achievements">Key Achievements</p>
         <ul class="academic-activities">
-          <li>Utilisation de logiciels professionnels (Adobe Premiere Pro, After Effects) pour monter et enrichir le contenu</li>
-          <li>Ajout d'effets visuels, transitions, sous-titres et animations pour rendre les vidéos plus engageantes</li>
-          <li>Collaboration avec des équipes créatives (designers, réalisateurs, marketeurs) pour produire du contenu de qualité</li>
-          <li>Optimisation des vidéos selon les plateformes (YouTube, Instagram, TikTok...)</li>
-          <li>Gestion des délais et organisation des fichiers pour une production efficace</li>
+          <li data-i18n="job3_l1">Using professional software (Adobe Premiere Pro, After Effects) to edit and enhance content</li>
+          <li data-i18n="job3_l2">Adding visual effects, transitions, subtitles, and animations to make videos more engaging</li>
+          <li data-i18n="job3_l3">Collaborating with creative teams (designers, directors, marketers) to produce quality content</li>
+          <li data-i18n="job3_l4">Optimizing videos for different platforms (YouTube, Instagram, TikTok...)</li>
+          <li data-i18n="job3_l5">Managing deadlines and organizing files for efficient production</li>
         </ul>
       </div>
 
       <div class="academic-card">
         <div class="academic-top">
-          <h3>Help Desk</h3>
+          <h3 data-i18n="job4_title">Help Desk</h3>
         </div>
-        <p class="academic-meta"><span class="logo-badge"><img src="image/prefecture.jpg" alt="Préfecture de Mohammedia"></span> Préfecture de Mohammedia · Stage · Avr 2022 — Juin 2022</p>
-        <p class="academic-place">Mohammedia, Maroc</p>
+        <p class="academic-meta"><span class="logo-badge"><img src="image/prefecture.jpg" alt="Prefecture of Mohammedia"></span> Prefecture of Mohammedia · <span data-i18n="job_internship">Internship</span> · Apr 2022 — Jun 2022</p>
+        <p class="academic-place">Mohammedia, Morocco</p>
 
-        <p class="academic-label">Réalisations Clés</p>
+        <p class="academic-label" data-i18n="key_achievements">Key Achievements</p>
         <ul class="academic-activities">
-          <li>Support technique aux utilisateurs : diagnostic et résolution des problèmes informatiques</li>
-          <li>Installation, configuration et maintenance des postes de travail, imprimantes et périphériques</li>
-          <li>Gestion des opérations réseau : diagnostic et résolution des problèmes de connectivité, configuration de switchs et routeurs</li>
-          <li>Administration Windows Server : gestion des comptes utilisateurs, partages réseau et droits d'accès</li>
-          <li>Mise à jour et maintenance des logiciels : installation d'applications et conformité du système</li>
+          <li data-i18n="job4_l1">Technical support for users: diagnosing and resolving IT issues</li>
+          <li data-i18n="job4_l2">Installing, configuring, and maintaining workstations, printers, and peripherals</li>
+          <li data-i18n="job4_l3">Managing network operations: diagnosing and resolving connectivity issues, configuring switches and routers</li>
+          <li data-i18n="job4_l4">Windows Server administration: managing user accounts, network shares, and access rights</li>
+          <li data-i18n="job4_l5">Updating and maintaining software: installing applications and ensuring system compliance</li>
         </ul>
       </div>
     </div>
@@ -983,56 +1279,56 @@ html {
   <!-- ============ PAGE : FORMATION & CERTIFICATIONS ============ -->
   <section id="formation" class="page">
     <div class="formation-heading">
-      <h1>Formation &amp; <span>Certifications</span></h1>
+      <h1 data-i18n="formation_title">Education &amp; Certifications</h1>
       <div class="underline"></div>
-      <p class="formation-subtitle">
-        Un parcours académique solide et des certifications reconnues dans le domaine
-        du digital et de l'intelligence artificielle.
+      <p class="formation-subtitle" data-i18n="formation_subtitle">
+        A solid academic background and recognized certifications in digital
+        technology and artificial intelligence.
       </p>
     </div>
 
-    <h2 class="section-title">Formation Académique</h2>
+    <h2 class="section-title" data-i18n="academic_title">Academic Background</h2>
     <div class="academic-list">
       <div class="academic-card">
         <div class="academic-top">
-          <h3>Génie Digital &amp; Intelligence Artificielle en Santé</h3>
-          <a href="#" class="academic-details-btn"><i class="fa-solid fa-graduation-cap"></i> Détails</a>
+          <h3 data-i18n="degree1_title">Digital Engineering &amp; Artificial Intelligence in Healthcare</h3>
+          <a href="#" class="academic-details-btn"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="details">Details</span></a>
         </div>
-        <p class="academic-meta">Suptech Mohammedia · 2024 — Présent</p>
-        <p class="academic-place">4<sup>e</sup> année</p>
+        <p class="academic-meta">Suptech Mohammedia · 2024 — <span data-i18n="present">Present</span></p>
+        <p class="academic-place" data-i18n="year4">4<sup>th</sup> year</p>
 
-        <p class="academic-label">Distinctions</p>
+        <p class="academic-label" data-i18n="distinctions">Distinctions</p>
         <div class="academic-distinctions">
-          <span class="distinction-tag">Projet en Intelligence Artificielle appliquée à la Santé</span>
-          <span class="distinction-tag">Participation à des projets académiques en IA & Technologies de Santé</span>
+          <span class="distinction-tag" data-i18n="distinction1">AI project applied to Healthcare</span>
+          <span class="distinction-tag" data-i18n="distinction2">Participation in academic projects on AI & Health Technologies</span>
         </div>
 
-        <p class="academic-label">Activités &amp; Leadership</p>
+        <p class="academic-label" data-i18n="activities">Activities &amp; Leadership</p>
         <ul class="academic-activities">
-          <li>Responsable de la Communication Apex Digital – UIB</li>
-          <li>Projet — Dossier de Marché Public MEDIPRO</li>
-          <li>Projet — Développement d’une solution basée sur l’Intelligence Artificielle</li>
+          <li data-i18n="activity1">Communications Officer, Apex Digital – UIB</li>
+          <li data-i18n="activity2">Project — MEDIPRO Public Procurement File</li>
+          <li data-i18n="activity3">Project — Development of an Artificial Intelligence-based solution</li>
         </ul>
       </div>
 
       <div class="academic-card">
         <div class="academic-top">
-          <h3>Diplôme en Infrastructure Digitale</h3>
-          <span class="academic-badge">OBTENU</span>
+          <h3 data-i18n="degree2_title">Diploma in Digital Infrastructure</h3>
+          <span class="academic-badge" data-i18n="obtained">OBTAINED</span>
         </div>
         <p class="academic-meta">ISTA Mohammedia · 2022 — 2024</p>
       </div>
 
       <div class="academic-card">
         <div class="academic-top">
-          <h3>Baccalauréat Sciences Physiques</h3>
-          <span class="academic-badge">OBTENU</span>
+          <h3 data-i18n="degree3_title">Baccalaureate in Physical Sciences</h3>
+          <span class="academic-badge" data-i18n="obtained">OBTAINED</span>
         </div>
         <p class="academic-meta">2021 — 2022</p>
       </div>
     </div>
 
-    <h2 class="section-title">Certifications Professionnelles</h2>
+    <h2 class="section-title" data-i18n="certs_title">Professional Certifications</h2>
     <div class="cert-grid">
       <div class="cert-card">
         <div class="cert-icon cert-icon-ai">
@@ -1040,8 +1336,8 @@ html {
         </div>
         <h3>Digital Skills: Artificial Intelligence</h3>
         <p class="cert-issuer">FutureLearn</p>
-        <p class="cert-dates">Janv. 2026 · Expire janv. 2028</p>
-        <p class="cert-desc">Introduction aux fondamentaux de l'intelligence artificielle et à ses applications concrètes.</p>
+        <p class="cert-dates" data-i18n="cert1_dates">Jan. 2026 · Expires Jan. 2028</p>
+        <p class="cert-desc" data-i18n="cert1_desc">Introduction to the fundamentals of artificial intelligence and its real-world applications.</p>
       </div>
 
       <div class="cert-card">
@@ -1050,16 +1346,16 @@ html {
         </div>
         <h3>Modern AI</h3>
         <p class="cert-issuer">Cisco</p>
-        <p class="cert-dates">Avr. 2026 · Expire avr. 2028</p>
-        <p class="cert-desc">Panorama des techniques modernes d'IA et de leurs usages en entreprise.</p>
+        <p class="cert-dates" data-i18n="cert2_dates">Apr. 2026 · Expires Apr. 2028</p>
+        <p class="cert-desc" data-i18n="cert2_desc">Overview of modern AI techniques and their applications in business.</p>
       </div>
 
       <div class="cert-card">
         <div class="cert-icon cert-icon-google">G</div>
         <h3>Google Analytics Certification</h3>
         <p class="cert-issuer">Google Digital Academy</p>
-        <p class="cert-dates">Janv. 2026 · Expire janv. 2027 · ID 172239536</p>
-        <p class="cert-desc">Maîtrise des outils d'analyse de données web et de suivi de performance digitale.</p>
+        <p class="cert-dates">Jan. 2026 · <span data-i18n="cert3_expires">Expires Jan. 2027</span> · ID 172239536</p>
+        <p class="cert-desc" data-i18n="cert3_desc">Mastery of web analytics tools and digital performance tracking.</p>
       </div>
     </div>
   </section>
@@ -1067,18 +1363,18 @@ html {
   <!-- ============ FOOTER ============ -->
   <footer class="site-footer" id="contact">
     <div class="cta-block">
-      <h2>Prêt à <span>Collaborer</span> ?</h2>
-      <p>Discutons de la façon dont je peux contribuer à vos projets digitaux, IA et développement web.</p>
+      <h2 data-i18n="contact_title">Ready to Collaborate?</h2>
+      <p data-i18n="contact_desc">Let's talk about how I can contribute to your digital, AI, and web development projects.</p>
       <div class="cta-buttons">
-        <a href="#" class="btn-filled"><i class="fa-solid fa-download"></i> Télécharger le CV</a>
-        <a href="Contact.html" class="btn-outline"><i class="fa-solid fa-envelope"></i> Me Contacter</a>
+        <a href="#" class="btn-filled"><i class="fa-solid fa-download"></i> <span data-i18n="btn_cv">Download CV</span></a>
+        <a href="mailto:haitam.tedbir@gmail.com" class="btn-outline"><i class="fa-solid fa-envelope"></i> <span data-i18n="btn_contact">Contact Me</span></a>
       </div>
     </div>
 
     <div class="footer-grid">
       <div class="footer-col footer-brand">
         <h3>Haitam <span>Tedbir</span></h3>
-        <p>Étudiant en Digital &amp; Intelligence Artificielle en Santé, passionné par la tech, l'IA et le développement web.</p>
+        <p data-i18n="footer_brand_text">Student in Digital Engineering &amp; AI in Healthcare, passionate about tech, AI, and web development.</p>
         <div class="footer-socials">
           <a href="https://www.linkedin.com/in/haitamtedbir/"><i class="fa-brands fa-linkedin-in"></i></a>
           <a href="https://github.com/haitamtedbir-code"><i class="fa-brands fa-github"></i></a>
@@ -1087,56 +1383,92 @@ html {
       </div>
 
       <div class="footer-col">
-        <h4>Liens Rapides</h4>
-        <a href="#home">Accueil</a>
-        <a href="#about">À Propos</a>
-        <a href="#experience">Expérience</a>
-        <a href="#formation">Formation</a>
+        <h4 data-i18n="quick_links">Quick Links</h4>
+        <a href="#home" data-i18n="nav_home">Home</a>
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#experience" data-i18n="nav_experience">Experience</a>
+        <a href="#formation" data-i18n="nav_formation">Education</a>
       </div>
 
       <div class="footer-col">
-        <h4>Expertise</h4>
+        <h4 data-i18n="expertise_title">Expertise</h4>
         <a href="#about">HTML &amp; CSS</a>
         <a href="#about">JavaScript</a>
         <a href="#about">Python</a>
         <a href="#about">Machine Learning</a>
-        <a href="#about">Sécurité Réseau</a>
+        <a href="#about" data-i18n="skill_netsec_title">Network Security</a>
       </div>
 
       <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="Contact.html"><i class="fa-solid fa-envelope"></i> Me Contacter</a>
+        <h4 data-i18n="nav_contact">Contact</h4>
+        <a href="mailto:haitam.tedbir@gmail.com"><i class="fa-solid fa-envelope"></i> <span data-i18n="btn_contact">Contact Me</span></a>
         <a href="https://www.linkedin.com/in/haitamtedbir/"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
         <a href="https://github.com/haitamtedbir-code"><i class="fa-brands fa-github"></i> GitHub</a>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>© 2026 Haitam Tedbir. Tous droits réservés.</p>
+      <p>© 2026 Haitam Tedbir. <span data-i18n="rights_reserved">All rights reserved.</span></p>
     </div>
   </footer>
 
   <!-- ============ NAVBAR ============ -->
-  <nav class="navbar">
-    <a href="#home" class="nav-link active" data-page="home" title="Accueil">
-      <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
-    </a>
-    <a href="#about" class="nav-link" data-page="about" title="Profil">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.3"/><path d="M5 20c1.2-4 4-6 7-6s5.8 2 7 6"/></svg>
-    </a>
-    <a href="#experience" class="nav-link" data-page="experience" title="Expérience">
-      <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7"/><path d="M3 12h18"/></svg>
-    </a>
-    <a href="#formation" class="nav-link" data-page="formation" title="Formation">
-      <svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
-    </a>
-    <a href="#contact" class="nav-link" data-page="contact" title="Contact">
-      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-    </a>
-  </nav>
+  <nav class="navbar" aria-label="Main navigation">
+  <a href="#home" class="nav-link active" data-page="home">
+    <i class="fa-solid fa-house"></i>
+    <span class="nav-label" data-i18n="nav_home">Home</span>
+  </a>
+  <a href="#about" class="nav-link" data-page="about">
+    <i class="fa-solid fa-user"></i>
+    <span class="nav-label" data-i18n="nav_about">About</span>
+  </a>
+  <a href="#experience" class="nav-link" data-page="experience">
+    <i class="fa-solid fa-briefcase"></i>
+    <span class="nav-label" data-i18n="nav_experience">Experience</span>
+  </a>
+  <a href="#formation" class="nav-link" data-page="formation">
+    <i class="fa-solid fa-graduation-cap"></i>
+    <span class="nav-label" data-i18n="nav_formation">Education</span>
+  </a>
+  <a href="#contact" class="nav-link" data-page="contact">
+    <i class="fa-solid fa-envelope"></i>
+    <span class="nav-label" data-i18n="nav_contact">Contact</span>
+  </a>
+</nav>
 
   <script>
-    // Preloader : disparaît une fois la page chargée
+
+    // Dark / Light mode
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+
+    function applyTheme(theme) {
+      const isDark = theme === 'dark';
+      document.body.classList.toggle('dark-mode', isDark);
+
+      themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      themeLabel.textContent = isDark ? 'Light' : 'Dark';
+      themeToggle.setAttribute(
+        'aria-label',
+        isDark ? 'Switch to light mode' : 'Switch to dark mode'
+      );
+      themeToggle.setAttribute(
+        'title',
+        isDark ? 'Switch to light mode' : 'Switch to dark mode'
+      );
+    }
+
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+    applyTheme(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+      localStorage.setItem('portfolio-theme', nextTheme);
+      applyTheme(nextTheme);
+    });
+
+    // Preloader
     window.addEventListener('load', () => {
       const preloader = document.getElementById('preloader');
       setTimeout(() => preloader.classList.add('hidden'), 400);
@@ -1145,7 +1477,6 @@ html {
     const navLinks = document.querySelectorAll('.nav-link[data-page]');
     const sections = document.querySelectorAll('.page, footer.site-footer');
 
-    // Clic sur la navbar -> défilement fluide vers la section
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -1154,7 +1485,6 @@ html {
       });
     });
 
-    // Met en surbrillance le lien de la section actuellement visible au scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1165,6 +1495,243 @@ html {
 
     sections.forEach(section => observer.observe(section));
   </script>
+
+  <script>
+
+    // Language switcher
+    function switchLanguage(lang) {
+      const dictionary = translations[lang];
+      if (!dictionary) return;
+
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (Object.prototype.hasOwnProperty.call(dictionary, key)) {
+          element.innerHTML = dictionary[key];
+        }
+      });
+
+      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang;
+      localStorage.setItem('portfolio-language', lang);
+    }
+
+    // Translations dictionary
+    const translations = {
+      fr: {
+        hero_subtitle: "Génie Digital & Intelligence Artificielle en Santé",
+        hero_desc: "Je suis Haitam Tedbir, étudiant en ingénierie du Digital et de l'Intelligence Artificielle en Santé. Passionné par la technologie, l'IA, les réseaux, DevOps et les solutions numériques. Je développe continuellement mes compétences techniques et professionnelles à travers mes projets académiques, stages et expériences pratiques.",
+        btn_cv: "Télécharger le CV",
+        btn_contact: "Me Contacter",
+        nav_home: "Accueil",
+        nav_about: "À propos",
+        nav_experience: "Expérience",
+        nav_formation: "Formation",
+        nav_contact: "Contact",
+
+        about_title_1: "À ",
+        about_title_2: "Propos",
+        about_summary_title: "Résumé Professionnel",
+        about_summary_text: "Étudiant motivé en Génie Digital & Intelligence Artificielle en Santé, je m'intéresse fortement à la technologie, au développement logiciel, au DevOps, à la virtualisation et à la cybersécurité. Mon parcours académique m'a permis de développer un esprit analytique et une réelle capacité à résoudre des problèmes complexes, tandis que mon expérience professionnelle chez Decathlon a renforcé mon leadership, mon esprit d'équipe, ma communication et mon sens du service. J'aime apprendre de nouvelles technologies, construire des projets concrets et faire évoluer continuellement mes compétences techniques.",
+        about_why_title: "Pourquoi Travailler Avec Moi",
+        about_why_text: "Je possède une approche analytique et structurée, nourrie par une passion réelle pour la compréhension des systèmes complexes. J'aime creuser au-delà de la surface, relier les données, anticiper les failles. Travailler avec moi, c'est collaborer avec quelqu'un de rigoureux, curieux, et investi dans chaque projet avec une vraie exigence intellectuelle.",
+        expertise_title: "Domaines d'Expertise",
+        skill_html: "Structuration sémantique de pages web modernes et accessibles",
+        skill_css: "Mise en forme, responsive design et animations d'interfaces",
+        skill_js: "Développement d'interactions dynamiques côté client",
+        skill_python: "Scripts, automatisation et projets en intelligence artificielle",
+        skill_ml_title: "Machine Learning",
+        skill_ml: "Conception de modèles prédictifs et traitement de données",
+        skill_netsec_title: "Sécurité Réseau",
+        skill_netsec: "Durcissement et surveillance de l'infrastructure",
+
+        exp_title: "Expérience Professionnelle",
+        exp_subtitle: "Un parcours diversifié entre développement web, gestion d'équipe et support technique.",
+        job_internship: "Stage",
+        job_freelance: "Freelance",
+        present: "Présent",
+        remote: "À distance",
+        key_achievements: "Réalisations Clés",
+        job2_title: "Store Pillar (Co-Manager)",
+        job1_l1: "Développement de pages web responsive avec HTML5, CSS3 et JavaScript",
+        job1_l2: "Conception et implémentation d'interfaces utilisateur modernes et responsives",
+        job1_l3: "Ajout de fonctionnalités interactives et d'éléments dynamiques en JavaScript",
+        job1_l4: "Amélioration de la structure, du style et de l'expérience utilisateur du site",
+        job1_l5: "Collaboration sur des projets de développement web selon les bonnes pratiques front-end",
+        job2_l1: "Gestion d'une équipe (magasin / rayon)",
+        job2_l2: "Garantie de la sécurité des clients et du personnel",
+        job2_l3: "Suivi et analyse des performances du rayon (chiffre d'affaires, marge, rentabilité), suivi des KPIs et mise en place de plans d'action",
+        job2_l4: "Encadrement et formation des nouveaux membres de l'équipe (stagiaires / CDD), suivi de l'intégration et du développement des compétences",
+        job2_l5: "Planification et animation des temps forts commerciaux (soldes, campagnes saisonnières...)",
+        job3_title: "Video Editor & Content Manager",
+        job3_l1: "Utilisation de logiciels professionnels (Adobe Premiere Pro, After Effects) pour monter et enrichir le contenu",
+        job3_l2: "Ajout d'effets visuels, transitions, sous-titres et animations pour rendre les vidéos plus engageantes",
+        job3_l3: "Collaboration avec des équipes créatives (designers, réalisateurs, marketeurs) pour produire du contenu de qualité",
+        job3_l4: "Optimisation des vidéos selon les plateformes (YouTube, Instagram, TikTok...)",
+        job3_l5: "Gestion des délais et organisation des fichiers pour une production efficace",
+        job4_title: "Help Desk",
+        job4_l1: "Support technique aux utilisateurs : diagnostic et résolution des problèmes informatiques",
+        job4_l2: "Installation, configuration et maintenance des postes de travail, imprimantes et périphériques",
+        job4_l3: "Gestion des opérations réseau : diagnostic et résolution des problèmes de connectivité, configuration de switchs et routeurs",
+        job4_l4: "Administration Windows Server : gestion des comptes utilisateurs, partages réseau et droits d'accès",
+        job4_l5: "Mise à jour et maintenance des logiciels : installation d'applications et conformité du système",
+
+        formation_title: "Formation & Certifications",
+        formation_subtitle: "Un parcours académique solide et des certifications reconnues dans le domaine du digital et de l'intelligence artificielle.",
+        academic_title: "Formation Académique",
+        degree1_title: "Génie Digital & Intelligence Artificielle en Santé",
+        details: "Détails",
+        year4: "4<sup>e</sup> année",
+        distinctions: "Distinctions",
+        distinction1: "Projet en Intelligence Artificielle appliquée à la Santé",
+        distinction2: "Participation à des projets académiques en IA & Technologies de Santé",
+        activities: "Activités & Leadership",
+        activity1: "Responsable de la Communication Apex Digital – UIB",
+        activity2: "Projet — Dossier de Marché Public MEDIPRO",
+        activity3: "Projet — Développement d'une solution basée sur l'Intelligence Artificielle",
+        degree2_title: "Diplôme en Infrastructure Digitale",
+        degree3_title: "Baccalauréat Sciences Physiques",
+        obtained: "OBTENU",
+        certs_title: "Certifications Professionnelles",
+        cert1_dates: "Janv. 2026 · Expire janv. 2028",
+        cert1_desc: "Introduction aux fondamentaux de l'intelligence artificielle et à ses applications concrètes.",
+        cert2_dates: "Avr. 2026 · Expire avr. 2028",
+        cert2_desc: "Panorama des techniques modernes d'IA et de leurs usages en entreprise.",
+        cert3_expires: "Expire janv. 2027",
+        cert3_desc: "Maîtrise des outils d'analyse de données web et de suivi de performance digitale.",
+
+        contact_title: "Prêt à Collaborer ?",
+        contact_desc: "Discutons de la façon dont je peux contribuer à vos projets digitaux, IA et développement web.",
+        footer_brand_text: "Étudiant en Digital & Intelligence Artificielle en Santé, passionné par la tech, l'IA et le développement web.",
+        quick_links: "Liens Rapides",
+        nav_home: "Accueil",
+        nav_about: "À Propos",
+        nav_experience: "Expérience",
+        nav_formation: "Formation",
+        nav_contact: "Contact",
+        rights_reserved: "Tous droits réservés."
+      },
+      en: {
+        nav_home: "Home",
+        nav_about: "About",
+        nav_experience: "Experience",
+        nav_formation: "Education",
+        nav_contact: "Contact",
+        hero_subtitle: "Digital & Artificial Intelligence in Healthcare Engineering",
+        hero_desc: "I'm Haitam Tedbir, a Digital & Artificial Intelligence in Healthcare Engineering student. I'm passionate about technology, artificial intelligence, networking, DevOps, and digital solutions. I'm continuously developing my technical and professional skills through academic projects, internships, and practical experiences.",
+        btn_cv: "Download CV",
+        btn_contact: "Contact Me",
+
+        about_title_1: "About ",
+        about_title_2: "Me",
+        about_summary_title: "Professional Summary",
+        about_summary_text: "Motivated student in Digital Engineering & AI in Healthcare, with a strong interest in technology, software development, DevOps, virtualization, and cybersecurity. My academic journey enabled me to build strong analytical skills and a real ability to solve complex problems, while my professional experience at Decathlon strengthened my leadership, teamwork, communication, and customer service skills. I love learning new technologies, building real projects, and continuously growing my technical skills.",
+        about_why_title: "Why Work With Me",
+        about_why_text: "I bring an analytical and structured approach, driven by a genuine passion for understanding complex systems. I enjoy going beyond the surface, connecting data, and anticipating vulnerabilities. Working with me means collaborating with someone rigorous, curious, and fully invested in every project with real intellectual standards.",
+        expertise_title: "Areas of Expertise",
+        skill_html: "Semantic structuring of modern, accessible web pages",
+        skill_css: "Styling, responsive design, and interface animations",
+        skill_js: "Development of dynamic client-side interactions",
+        skill_python: "Scripts, automation, and AI projects",
+        skill_ml_title: "Machine Learning",
+        skill_ml: "Designing predictive models and processing data",
+        skill_netsec_title: "Network Security",
+        skill_netsec: "Hardening and monitoring of infrastructure",
+
+        exp_title: "Work Experience",
+        exp_subtitle: "A diverse background spanning web development, team management, and technical support.",
+        job_internship: "Internship",
+        job_freelance: "Freelance",
+        present: "Present",
+        remote: "Remote",
+        key_achievements: "Key Achievements",
+        job2_title: "Store Pillar (Co-Manager)",
+        job1_l1: "Development of responsive web pages with HTML5, CSS3, and JavaScript",
+        job1_l2: "Design and implementation of modern, responsive user interfaces",
+        job1_l3: "Adding interactive features and dynamic elements in JavaScript",
+        job1_l4: "Improving the structure, style, and user experience of the site",
+        job1_l5: "Collaborating on web development projects following front-end best practices",
+        job2_l1: "Managing a team (store / department)",
+        job2_l2: "Ensuring the safety of customers and staff",
+        job2_l3: "Tracking and analyzing department performance (revenue, margin, profitability), KPI monitoring, and action plans",
+        job2_l4: "Coaching and training new team members (interns / fixed-term contracts), tracking onboarding and skills development",
+        job2_l5: "Planning and running key commercial events (sales, seasonal campaigns...)",
+        job3_title: "Video Editor & Content Manager",
+        job3_l1: "Using professional software (Adobe Premiere Pro, After Effects) to edit and enhance content",
+        job3_l2: "Adding visual effects, transitions, subtitles, and animations to make videos more engaging",
+        job3_l3: "Collaborating with creative teams (designers, directors, marketers) to produce quality content",
+        job3_l4: "Optimizing videos for different platforms (YouTube, Instagram, TikTok...)",
+        job3_l5: "Managing deadlines and organizing files for efficient production",
+        job4_title: "Help Desk",
+        job4_l1: "Technical support for users: diagnosing and resolving IT issues",
+        job4_l2: "Installing, configuring, and maintaining workstations, printers, and peripherals",
+        job4_l3: "Managing network operations: diagnosing and resolving connectivity issues, configuring switches and routers",
+        job4_l4: "Windows Server administration: managing user accounts, network shares, and access rights",
+        job4_l5: "Updating and maintaining software: installing applications and ensuring system compliance",
+
+        formation_title: "Education & Certifications",
+        formation_subtitle: "A solid academic background and recognized certifications in digital technology and artificial intelligence.",
+        academic_title: "Academic Background",
+        degree1_title: "Digital Engineering & Artificial Intelligence in Healthcare",
+        details: "Details",
+        year4: "4<sup>th</sup> year",
+        distinctions: "Distinctions",
+        distinction1: "AI project applied to Healthcare",
+        distinction2: "Participation in academic projects on AI & Health Technologies",
+        activities: "Activities & Leadership",
+        activity1: "Communications Officer, Apex Digital – UIB",
+        activity2: "Project — MEDIPRO Public Procurement File",
+        activity3: "Project — Development of an Artificial Intelligence-based solution",
+        degree2_title: "Diploma in Digital Infrastructure",
+        degree3_title: "Baccalaureate in Physical Sciences",
+        obtained: "OBTAINED",
+        certs_title: "Professional Certifications",
+        cert1_dates: "Jan. 2026 · Expires Jan. 2028",
+        cert1_desc: "Introduction to the fundamentals of artificial intelligence and its real-world applications.",
+        cert2_dates: "Apr. 2026 · Expires Apr. 2028",
+        cert2_desc: "Overview of modern AI techniques and their applications in business.",
+        cert3_expires: "Expires Jan. 2027",
+        cert3_desc: "Mastery of web analytics tools and digital performance tracking.",
+
+        contact_title: "Ready to Collaborate?",
+        contact_desc: "Let's talk about how I can contribute to your digital, AI, and web development projects.",
+        footer_brand_text: "Student in Digital Engineering & AI in Healthcare, passionate about tech, AI, and web development.",
+        quick_links: "Quick Links",
+        nav_home: "Home",
+        nav_about: "About",
+        nav_experience: "Experience",
+        nav_formation: "Education",
+        nav_contact: "Contact",
+        rights_reserved: "All rights reserved."
+      }
+    };
+
+    function switchLanguage(lang) {
+      localStorage.setItem("preferred_language", lang);
+
+      document.querySelectorAll(".lang-btn").forEach(btn => btn.classList.remove("active"));
+      const activeBtn = document.getElementById(`btn-${lang}`);
+      if (activeBtn) activeBtn.classList.add("active");
+
+      document.querySelectorAll("[data-i18n]").forEach(element => {
+        const key = element.getAttribute("data-i18n");
+        if (translations[lang] && translations[lang][key] !== undefined) {
+          element.innerHTML = translations[lang][key];
+        }
+      });
+
+      document.documentElement.lang = lang;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Langue par défaut : anglais (EN), sauf si l'utilisateur a déjà choisi le français
+      const savedLang = localStorage.getItem("preferred_language") || "en";
+      switchLanguage(savedLang);
+    });
+  
+    const savedLanguage = localStorage.getItem('portfolio-language') || 'en';
+    switchLanguage(savedLanguage);
+</script>
 
 </body>
 </html>
