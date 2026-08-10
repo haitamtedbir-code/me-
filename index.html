@@ -1079,10 +1079,533 @@ body.dark-mode .footer-socials a:hover {
 }
 
 
-/* ===================== PAGE ZOOM ===================== */
-/* Makes the whole portfolio appear larger, like browser zoom. */
+/* Responsive sizing — no global browser-style zoom */
 html {
-  zoom: 1.10;
+  font-size: 16px;
+}
+
+
+/* Certification logos */
+.cert-icon.cert-logo {
+  background: #fff;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.cert-icon.cert-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+}
+
+
+.cert-view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 9px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  background: transparent;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.cert-view-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+
+/* About title in red */
+.about-main-title {
+  color: #ff3b3b !important;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.about-main-title::after {
+  background: #ff3b3b !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE / MOBILE / TABLET / DESKTOP
+   Smooth, flexible layout
+   ========================================================= */
+
+html {
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+img, svg, video {
+  max-width: 100%;
+}
+
+.page {
+  width: min(100%, 1100px);
+  padding-left: clamp(16px, 4vw, 40px);
+  padding-right: clamp(16px, 4vw, 40px);
+}
+
+/* Hero */
+#home {
+  min-height: auto;
+}
+
+#home .profile {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 20px clamp(12px, 3vw, 40px);
+}
+
+.profile-name {
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.profile-title {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  line-height: 1.45;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-wrap: anywhere;
+}
+
+.profile-desc {
+  width: min(100%, 760px);
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(.95rem, 2vw, 1.05rem);
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.profile-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.profile-buttons .btn {
+  min-height: 44px;
+  max-width: 100%;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Section titles */
+.section-title,
+#about .section-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.25;
+  margin-top: clamp(36px, 7vw, 60px);
+  margin-bottom: clamp(24px, 5vw, 36px);
+  overflow-wrap: anywhere;
+}
+
+/* About */
+.about-grid {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 30px);
+  margin-bottom: clamp(50px, 8vw, 90px);
+}
+
+.about-card {
+  min-width: 0;
+  padding: clamp(22px, 4vw, 40px);
+}
+
+.about-card h2 {
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  line-height: 1.3;
+}
+
+.about-card p {
+  font-size: clamp(.92rem, 1.8vw, 1rem);
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+/* Expertise */
+.expertise-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2.5vw, 26px);
+}
+
+.expertise-card {
+  min-width: 0;
+  padding: clamp(24px, 4vw, 40px) clamp(16px, 2.5vw, 28px);
+}
+
+.expertise-card h3,
+.expertise-card p {
+  overflow-wrap: anywhere;
+}
+
+.expertise-card p {
+  line-height: 1.6;
+}
+
+/* Experience / academic cards */
+.academic-list {
+  width: 100%;
+}
+
+.academic-card {
+  min-width: 0;
+  padding: clamp(22px, 4vw, 40px) clamp(18px, 4vw, 44px);
+}
+
+.academic-top h3 {
+  min-width: 0;
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.academic-meta,
+.academic-place,
+.academic-label,
+.academic-activities {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.academic-meta {
+  line-height: 1.6;
+}
+
+.academic-activities {
+  padding-left: 1.2rem;
+}
+
+.academic-activities li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* Logos */
+.logo-badge {
+  flex-shrink: 0;
+}
+
+.logo-badge img {
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Certifications */
+.cert-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2.5vw, 26px);
+}
+
+.cert-card {
+  min-width: 0;
+  padding: clamp(22px, 3vw, 34px) clamp(16px, 2.5vw, 26px);
+}
+
+.cert-card h3,
+.cert-desc,
+.cert-dates,
+.cert-issuer {
+  overflow-wrap: anywhere;
+}
+
+.cert-view-btn {
+  max-width: 100%;
+  min-height: 44px;
+  white-space: normal;
+}
+
+/* Footer */
+.footer-grid {
+  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  gap: clamp(22px, 4vw, 40px);
+}
+
+.footer-col {
+  min-width: 0;
+}
+
+.footer-col p,
+.footer-col a {
+  overflow-wrap: anywhere;
+}
+
+/* Fixed controls */
+.language-switcher,
+.theme-toggle {
+  max-width: calc(100vw - 24px);
+}
+
+.language-switcher {
+  right: 12px;
+}
+
+.theme-toggle {
+  right: 190px;
+}
+
+/* Prevent fixed navigation from becoming too wide */
+.navbar {
+  max-width: calc(100vw - 24px);
+}
+
+/* ---------------- TABLET ---------------- */
+@media (max-width: 900px) {
+  .page {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .expertise-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cert-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .navbar {
+    gap: 3px;
+    padding: 9px 10px;
+    bottom: 18px;
+  }
+
+  .navbar .nav-link {
+    min-width: 42px;
+    padding: 8px 9px;
+  }
+
+  .navbar .nav-label {
+    display: none;
+  }
+}
+
+/* ---------------- MOBILE ---------------- */
+@media (max-width: 600px) {
+  html {
+    font-size: 15px;
+  }
+
+  .page {
+    padding-top: 54px;
+    padding-bottom: 54px;
+  }
+
+  #home .profile {
+    padding: 12px 4px;
+  }
+
+  .profile-img {
+    width: clamp(130px, 42vw, 175px);
+    height: clamp(130px, 42vw, 175px);
+    margin-bottom: 24px;
+  }
+
+  .profile-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    width: min(100%, 360px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .profile-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .expertise-grid,
+  .cert-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .expertise-card {
+    padding: 26px 20px;
+  }
+
+  .academic-top {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .academic-top .academic-details-btn,
+  .academic-top .academic-badge {
+    align-self: flex-start;
+  }
+
+  .academic-card {
+    border-radius: 12px;
+  }
+
+  .academic-distinctions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .distinction-tag {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  /* Keep language + theme controls usable without overlap */
+  .language-switcher {
+    top: 10px;
+    right: 10px;
+    padding: 5px 8px;
+    gap: 4px;
+  }
+
+  .language-switcher .lang-btn {
+    padding: 5px 6px;
+    font-size: 12px;
+  }
+
+  .theme-toggle {
+    top: 54px;
+    right: 10px;
+    padding: 7px 9px;
+    font-size: 12px;
+  }
+
+  /* Bottom navigation: compact and touch-friendly */
+  .navbar {
+    left: 12px;
+    right: 12px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    transform: none;
+    width: auto;
+    max-width: none;
+    justify-content: space-around;
+    gap: 2px;
+    padding: 7px 6px;
+    border-radius: 16px;
+  }
+
+  .navbar .nav-link {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    height: 42px;
+    padding: 7px 4px;
+  }
+
+  .navbar .nav-link i,
+  .navbar .nav-link svg {
+    font-size: 1rem;
+  }
+
+  .footer-bottom {
+    padding-bottom: 85px;
+  }
+}
+
+/* ---------------- SMALL PHONES ---------------- */
+@media (max-width: 380px) {
+  .page {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .profile-name {
+    font-size: 1.8rem;
+  }
+
+  .profile-title {
+    font-size: .95rem;
+  }
+
+  .profile-desc {
+    font-size: .9rem;
+  }
+
+  .language-switcher .lang-btn {
+    font-size: 11px;
+  }
+
+  .navbar {
+    left: 8px;
+    right: 8px;
+  }
+
+  .navbar .nav-link {
+    height: 40px;
+  }
+}
+
+/* Touch devices: avoid hover-only movement */
+@media (hover: none) and (pointer: coarse) {
+  .expertise-card:hover,
+  .cert-card:hover,
+  .cert-view-btn:hover,
+  .theme-toggle:hover {
+    transform: none;
+  }
+
+  .expertise-card,
+  .cert-card,
+  .cert-view-btn,
+  .theme-toggle,
+  .navbar a,
+  .language-switcher .lang-btn {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Accessibility / reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 </style>
@@ -1299,6 +1822,53 @@ html {
     </div>
   </section>
 
+
+  <!-- ============ PAGE : PROJETS / PROJECTS ============ -->
+  <section id="projects" class="page">
+    <div class="formation-heading">
+      <h1 data-i18n="projects_title">Projects</h1>
+      <div class="underline"></div>
+      <p class="formation-subtitle" data-i18n="projects_subtitle">
+        Selected academic and digital projects showcasing my technical skills.
+      </p>
+    </div>
+
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon cert-icon-ai">
+          <i class="fa-solid fa-file-contract"></i>
+        </div>
+        <h3 data-i18n="project1_title">MEDIPRO Public Procurement File</h3>
+        <p class="cert-issuer">MEDIPRO</p>
+        <p class="cert-desc" data-i18n="project1_desc">
+          Academic project focused on preparing and structuring a public procurement file.
+        </p>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon cert-icon-google">
+          <i class="fa-solid fa-robot"></i>
+        </div>
+        <h3 data-i18n="project2_title">Artificial Intelligence Solution</h3>
+        <p class="cert-issuer">AI &amp; Healthcare</p>
+        <p class="cert-desc" data-i18n="project2_desc">
+          Development of an artificial intelligence-based solution applied to healthcare.
+        </p>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon cert-icon-cisco">
+          <i class="fa-solid fa-code"></i>
+        </div>
+        <h3 data-i18n="project3_title">Responsive Web Development</h3>
+        <p class="cert-issuer">HTML · CSS · JavaScript</p>
+        <p class="cert-desc" data-i18n="project3_desc">
+          Design and development of modern responsive web interfaces with interactive features.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ PAGE : FORMATION & CERTIFICATIONS ============ -->
   <section id="formation" class="page">
     <div class="formation-heading">
@@ -1354,31 +1924,36 @@ html {
     <h2 class="section-title" data-i18n="certs_title">Professional Certifications</h2>
     <div class="cert-grid">
       <div class="cert-card">
-        <div class="cert-icon cert-icon-ai">
-          <svg viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="10" rx="2"/><circle cx="9" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><path d="M12 8V5M9 5h6"/></svg>
+        <div class="cert-icon cert-icon-ai cert-logo">
+          <img src="image/futurelearn-600x338.png" alt="FutureLearn">
         </div>
         <h3>Digital Skills: Artificial Intelligence</h3>
         <p class="cert-issuer">FutureLearn</p>
         <p class="cert-dates" data-i18n="cert1_dates">Jan. 2026 · Expires Jan. 2028</p>
         <p class="cert-desc" data-i18n="cert1_desc">Introduction to the fundamentals of artificial intelligence and its real-world applications.</p>
+        <a href="#" class="cert-view-btn" data-i18n="cert_view">View Certificate</a>
       </div>
 
       <div class="cert-card">
-        <div class="cert-icon cert-icon-cisco">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2"/><circle cx="6" cy="14" r="2"/><circle cx="18" cy="14" r="2"/><circle cx="12" cy="18" r="2"/><path d="M12 8v3M8 13l2 2M16 13l-2 2"/></svg>
+        <div class="cert-icon cert-icon-cisco cert-logo">
+          <img src="image/cisco-square-blue-logo-icon-png-735..." alt="Cisco">
         </div>
         <h3>Modern AI</h3>
         <p class="cert-issuer">Cisco</p>
         <p class="cert-dates" data-i18n="cert2_dates">Apr. 2026 · Expires Apr. 2028</p>
         <p class="cert-desc" data-i18n="cert2_desc">Overview of modern AI techniques and their applications in business.</p>
+        <a href="#" class="cert-view-btn" data-i18n="cert_view">View Certificate</a>
       </div>
 
       <div class="cert-card">
-        <div class="cert-icon cert-icon-google">G</div>
+        <div class="cert-icon cert-icon-google cert-logo">
+          <img src="image/Google_G_logo.svg.png" alt="Google">
+        </div>
         <h3>Google Analytics Certification</h3>
         <p class="cert-issuer">Google Digital Academy</p>
         <p class="cert-dates">Jan. 2026 · <span data-i18n="cert3_expires">Expires Jan. 2027</span> · ID 172239536</p>
         <p class="cert-desc" data-i18n="cert3_desc">Mastery of web analytics tools and digital performance tracking.</p>
+        <a href="#" class="cert-view-btn" data-i18n="cert_view">View Certificate</a>
       </div>
     </div>
   </section>
@@ -1411,6 +1986,7 @@ html {
         <a href="#about" data-i18n="nav_about">About</a>
         <a href="#experience" data-i18n="nav_experience">Experience</a>
         <a href="#formation" data-i18n="nav_formation">Education</a>
+    <a href="#projects" data-i18n="nav_projects">Projects</a>
       </div>
 
       <div class="footer-col">
@@ -1448,6 +2024,10 @@ html {
   <a href="#experience" class="nav-link" data-page="experience">
     <i class="fa-solid fa-briefcase"></i>
     <span class="nav-label" data-i18n="nav_experience">Experience</span>
+  </a>
+  <a href="#projects" class="nav-link" data-page="projects">
+    <i class="fa-solid fa-folder-open"></i>
+    <span class="nav-label" data-i18n="nav_projects">Projects</span>
   </a>
   <a href="#formation" class="nav-link" data-page="formation">
     <i class="fa-solid fa-graduation-cap"></i>
@@ -1553,10 +2133,12 @@ html {
         nav_about: "À propos",
         nav_experience: "Expérience",
         nav_formation: "Formation",
+        nav_projects: "Projets",
         nav_contact: "Contact",
 
         about_title_1: "À ",
         about_title_2: "Propos",
+        about_title: "À PROPOS",
         about_summary_title: "Résumé Professionnel",
         about_summary_text: "Étudiant motivé en Génie Digital & Intelligence Artificielle en Santé, je m'intéresse fortement à la technologie, au développement logiciel, au DevOps, à la virtualisation et à la cybersécurité. Mon parcours académique m'a permis de développer un esprit analytique et une réelle capacité à résoudre des problèmes complexes, tandis que mon expérience professionnelle chez Decathlon a renforcé mon leadership, mon esprit d'équipe, ma communication et mon sens du service. J'aime apprendre de nouvelles technologies, construire des projets concrets et faire évoluer continuellement mes compétences techniques.",
         about_why_title: "Pourquoi Travailler Avec Moi",
@@ -1602,6 +2184,15 @@ html {
         job4_l4: "Administration Windows Server : gestion des comptes utilisateurs, partages réseau et droits d'accès",
         job4_l5: "Mise à jour et maintenance des logiciels : installation d'applications et conformité du système",
 
+        projects_title: "Projets",
+        projects_subtitle: "Une sélection de projets académiques et numériques mettant en valeur mes compétences techniques.",
+        project1_title: "Dossier de marché public MEDIPRO",
+        project1_desc: "Projet académique consacré à la préparation et à la structuration d'un dossier de marché public.",
+        project2_title: "Solution basée sur l'intelligence artificielle",
+        project2_desc: "Développement d'une solution basée sur l'intelligence artificielle appliquée au domaine de la santé.",
+        project3_title: "Développement Web Responsive",
+        project3_desc: "Conception et développement d'interfaces web modernes et responsives avec des fonctionnalités interactives.",
+
         formation_title: "Formation & Certifications",
         formation_subtitle: "Un parcours académique solide et des certifications reconnues dans le domaine du digital et de l'intelligence artificielle.",
         academic_title: "Formation Académique",
@@ -1642,6 +2233,7 @@ html {
         nav_about: "About",
         nav_experience: "Experience",
         nav_formation: "Education",
+        nav_projects: "Projects",
         nav_contact: "Contact",
         hero_subtitle: "Digital & Artificial Intelligence in Healthcare Engineering",
         hero_desc: "I'm Haitam Tedbir, a Digital & Artificial Intelligence in Healthcare Engineering student. I'm passionate about technology, artificial intelligence, networking, DevOps, and digital solutions. I'm continuously developing my technical and professional skills through academic projects, internships, and practical experiences.",
@@ -1650,6 +2242,7 @@ html {
 
         about_title_1: "About ",
         about_title_2: "Me",
+        about_title: "ABOUT",
         about_summary_title: "Professional Summary",
         about_summary_text: "Motivated student in Digital Engineering & AI in Healthcare, with a strong interest in technology, software development, DevOps, virtualization, and cybersecurity. My academic journey enabled me to build strong analytical skills and a real ability to solve complex problems, while my professional experience at Decathlon strengthened my leadership, teamwork, communication, and customer service skills. I love learning new technologies, building real projects, and continuously growing my technical skills.",
         about_why_title: "Why Work With Me",
@@ -1695,6 +2288,15 @@ html {
         job4_l4: "Windows Server administration: managing user accounts, network shares, and access rights",
         job4_l5: "Updating and maintaining software: installing applications and ensuring system compliance",
 
+        projects_title: "Projects",
+        projects_subtitle: "Selected academic and digital projects showcasing my technical skills.",
+        project1_title: "MEDIPRO Public Procurement File",
+        project1_desc: "Academic project focused on preparing and structuring a public procurement file.",
+        project2_title: "Artificial Intelligence Solution",
+        project2_desc: "Development of an artificial intelligence-based solution applied to healthcare.",
+        project3_title: "Responsive Web Development",
+        project3_desc: "Design and development of modern responsive web interfaces with interactive features.",
+
         formation_title: "Education & Certifications",
         formation_subtitle: "A solid academic background and recognized certifications in digital technology and artificial intelligence.",
         academic_title: "Academic Background",
@@ -1712,6 +2314,7 @@ html {
         degree3_title: "Baccalaureate in Physical Sciences",
         obtained: "OBTAINED",
         certs_title: "Professional Certifications",
+        cert_view: "View Certificate",
         cert1_dates: "Jan. 2026 · Expires Jan. 2028",
         cert1_desc: "Introduction to the fundamentals of artificial intelligence and its real-world applications.",
         cert2_dates: "Apr. 2026 · Expires Apr. 2028",
