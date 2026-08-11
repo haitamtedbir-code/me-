@@ -1753,7 +1753,7 @@ img, svg, video {
 
 
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Switch theme">
-    <i class="fa-solid fa-moon" id="themeIcon"></i>
+    <i class="fa-solid fa-lightbulb" id="themeIcon"></i>
     <span id="themeLabel">Dark</span>
   </button>
 
@@ -2192,8 +2192,8 @@ img, svg, video {
       document.body.classList.toggle('dark-mode', isDark);
       document.documentElement.classList.toggle('dark-mode', isDark);
 
-      themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-      themeLabel.textContent = isDark ? 'Light' : 'Dark';
+      themeIcon.className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-lightbulb';
+      themeLabel.textContent = isDark ? 'Dark' : 'Light';
       themeToggle.setAttribute(
         'aria-label',
         isDark ? 'Switch to light mode' : 'Switch to dark mode'
@@ -2536,13 +2536,19 @@ img, svg, video {
   (function () {
     let currentCode = null;
     let emailjsReady = false;
+    let isSending = false;
 
     const emailjsScript = document.createElement("script");
     emailjsScript.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
     emailjsScript.async = true;
     emailjsScript.onload = () => {
-      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-      emailjsReady = true;
+      try {
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+        emailjsReady = true;
+        console.log("EmailJS is ready.");
+      } catch (error) {
+        console.error("EmailJS initialization error:", error);
+      }
     };
     emailjsScript.onerror = () => {
       console.error("EmailJS library could not be loaded.");
@@ -2583,33 +2589,63 @@ img, svg, video {
     }
 
     async function sendCode() {
+      if (isSending) return;
+
       const email = emailInput.value.trim();
+      const isFrench = document.documentElement.lang === "fr";
+
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        emailError.textContent = document.documentElement.lang === "fr" ? "Adresse email invalide." : "Invalid email address.";
+        emailError.textContent = isFrench
+          ? "Adresse email invalide."
+          : "Invalid email address.";
+        emailInput.focus();
         return;
       }
+
       emailError.textContent = "";
+      codeError.textContent = "";
 
       if (!emailjsReady || typeof emailjs === "undefined") {
-        emailError.textContent = document.documentElement.lang === "fr"
-          ? "Le service email n'est pas encore prêt. Réessayez dans quelques secondes."
-          : "The email service is not ready yet. Please try again in a few seconds.";
+        emailError.textContent = isFrench
+          ? "Le service email n'est pas prêt. Rechargez la page et réessayez."
+          : "The email service is not ready. Refresh the page and try again.";
         return;
       }
 
       currentCode = generateCode();
+      isSending = true;
+
+      const sendButton = document.getElementById("cvSendCodeBtn");
+      const resendButton = document.getElementById("cvResendBtn");
+      const originalSendText = sendButton.textContent;
+      const originalResendText = resendButton.textContent;
+
+      sendButton.disabled = true;
+      resendButton.disabled = true;
+      sendButton.textContent = isFrench ? "Envoi..." : "Sending...";
+
+      /*
+       * IMPORTANT — EmailJS TEMPLATE SETTINGS
+       * --------------------------------------
+       * In EmailJS > Email Templates > template_0zgysge:
+       *
+       * To Email: {{to_email}}
+       * Subject: Your CV verification code
+       * Body: {{code}}
+       *
+       * This makes the message go to the email typed by the visitor.
+       */
+      const templateParams = {
+        to_email: email,
+        code: currentCode,
+        verification_code: currentCode,
+        user_email: email,
+        email: email,
+        subject: "Your CV verification code",
+        message: `Your CV verification code is: ${currentCode}`
+      };
 
       try {
-        const templateParams = {
-          to_email: email,
-          email: email,
-          user_email: email,
-          code: currentCode,
-          verification_code: currentCode,
-          subject: "Your CV verification code",
-          message: `Your CV verification code is: ${currentCode}`
-        };
-
         const response = await emailjs.send(
           EMAILJS_SERVICE_ID,
           EMAILJS_TEMPLATE_ID,
@@ -2617,21 +2653,53 @@ img, svg, video {
         );
 
         console.log("EmailJS success:", response.status, response.text);
+
         emailDisplay.textContent = email;
         stepEmail.style.display = "none";
         stepCode.style.display = "block";
+        codeInput.value = "";
+        codeInput.focus();
       } catch (err) {
-        emailError.textContent = document.documentElement.lang === "fr" ? "Erreur d'envoi. Réessayez." : "Send error. Try again.";
-        console.error(err);
+        console.error("EmailJS send error:", err);
+
+        let message = isFrench
+          ? "Impossible d'envoyer le code. Vérifiez votre configuration EmailJS."
+          : "Unable to send the code. Check your EmailJS configuration.";
+
+        if (err && err.text) {
+          console.error("EmailJS details:", err.text);
+        }
+
+        emailError.textContent = message;
+        currentCode = null;
+      } finally {
+        isSending = false;
+        sendButton.disabled = false;
+        resendButton.disabled = false;
+        sendButton.textContent = originalSendText;
+        resendButton.textContent = originalResendText;
       }
     }
 
     function verifyCode() {
-      const entered = codeInput.value.trim();
-      if (entered !== currentCode) {
-        codeError.textContent = document.documentElement.lang === "fr" ? "Code incorrect." : "Incorrect code.";
+      const entered = codeInput.value.trim().replace(/\s/g, "");
+      const isFrench = document.documentElement.lang === "fr";
+
+      if (!currentCode) {
+        codeError.textContent = isFrench
+          ? "Demandez d'abord un nouveau code."
+          : "Please request a new code first.";
         return;
       }
+
+      if (!/^\d{6}$/.test(entered) || entered !== currentCode) {
+        codeError.textContent = isFrench
+          ? "Code incorrect."
+          : "Incorrect code.";
+        codeInput.focus();
+        return;
+      }
+
       codeError.textContent = "";
       stepCode.style.display = "none";
       stepSuccess.style.display = "block";
@@ -2642,10 +2710,12 @@ img, svg, video {
       const link = document.createElement("a");
       link.href = cv.path;
       link.download = cv.name;
+      link.rel = "noopener";
       document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link);
+      link.remove();
 
+      currentCode = null;
       setTimeout(closeModal, 1500);
     }
 
@@ -2653,6 +2723,21 @@ img, svg, video {
     document.getElementById("cvSendCodeBtn").addEventListener("click", sendCode);
     document.getElementById("cvVerifyBtn").addEventListener("click", verifyCode);
     document.getElementById("cvResendBtn").addEventListener("click", sendCode);
+
+    emailInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        sendCode();
+      }
+    });
+
+    codeInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        verifyCode();
+      }
+    });
+
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) closeModal();
     });
