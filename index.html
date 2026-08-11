@@ -2630,31 +2630,37 @@ img, svg, video {
        * In EmailJS > Email Templates > template_0zgysge:
        *
        * To Email: {{to_email}}
+       * Bcc: {{bcc_email}}
        * Subject: Your CV verification code
        * Body: {{code}}
        *
-       * This makes the message go to the email typed by the visitor.
+       * One EmailJS request is used for both recipients.
+       * This avoids EmailJS's 1-request-per-second rate limit.
        */
+      const MY_EMAIL = "haitam.tedbir@gmail.com";
+
       const templateParams = {
         to_email: email,
+        bcc_email: MY_EMAIL,
         code: currentCode,
         verification_code: currentCode,
         user_email: email,
-        email: email,
+        visitor_email: email,
         subject: "Your CV verification code",
         message: `Your CV verification code is: ${currentCode}`
       };
 
       try {
+        // One request: visitor receives the email, and you receive a BCC copy.
         const response = await emailjs.send(
           EMAILJS_SERVICE_ID,
           EMAILJS_TEMPLATE_ID,
           templateParams
         );
 
-        console.log("EmailJS success:", response.status, response.text);
+        console.log("EmailJS sent:", response.status, response.text);
 
-        emailDisplay.textContent = email;
+      emailDisplay.textContent = email;
         stepEmail.style.display = "none";
         stepCode.style.display = "block";
         codeInput.value = "";
@@ -2753,4 +2759,4 @@ img, svg, video {
   </script>
 
 </body>
-</html>
+</html>g
