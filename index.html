@@ -1608,6 +1608,113 @@ img, svg, video {
   }
 }
 
+/* ===================== CV VERIFICATION MODAL ===================== */
+.cv-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  align-items: center;
+  justify-content: center;
+  z-index: 2500;
+  padding: 16px;
+}
+
+.cv-modal-overlay.active {
+  display: flex;
+}
+
+.cv-modal {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.cv-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-body);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.cv-modal h3 {
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.cv-modal p {
+  color: var(--text-body);
+  font-size: 14px;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.cv-modal input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  margin-bottom: 12px;
+  text-align: center;
+  box-sizing: border-box;
+  background: var(--card-bg);
+  color: var(--text-main);
+}
+
+.cv-modal input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.cv-btn {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s ease;
+}
+
+.cv-btn:hover { background: var(--accent-2); }
+
+.cv-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.cv-link-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 13px;
+  margin-top: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.cv-error {
+  color: var(--accent-2);
+  font-size: 13px;
+  min-height: 16px;
+  margin-top: -4px;
+}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -1670,7 +1777,7 @@ img, svg, video {
       </p>
 
       <div class="profile-buttons">
-        <a href="#" class="btn btn-filled"><i class="fa-solid fa-download"></i> <span data-i18n="btn_cv">Download CV</span></a>
+        <a href="#" class="btn btn-filled cv-download-trigger"><i class="fa-solid fa-download"></i> <span data-i18n="btn_cv">Download CV</span></a>
         <a href="mailto:haitam.tedbir@gmail.com" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> <span data-i18n="btn_contact">Contact Me</span></a>
       </div>
 
@@ -1936,7 +2043,7 @@ img, svg, video {
 
       <div class="cert-card">
         <div class="cert-icon cert-icon-cisco cert-logo">
-          <img src="image/cisco-square-blue-logo-icon-png-735..." alt="Cisco">
+          <img src="image/cisco-square-blue-logo-icon-png-735811696612218gzoiadfplh.png" alt="Cisco">
         </div>
         <h3>Modern AI</h3>
         <p class="cert-issuer">Cisco</p>
@@ -1947,7 +2054,7 @@ img, svg, video {
 
       <div class="cert-card">
         <div class="cert-icon cert-icon-google cert-logo">
-          <img src="image/Google_G_logo.svg.png" alt="Google">
+          <img src="image/Google__G__logo.svg.png" alt="Google">
         </div>
         <h3>Google Analytics Certification</h3>
         <p class="cert-issuer">Google Digital Academy</p>
@@ -1964,7 +2071,7 @@ img, svg, video {
       <h2 data-i18n="contact_title">Ready to Collaborate?</h2>
       <p data-i18n="contact_desc">Let's talk about how I can contribute to your digital, AI, and web development projects.</p>
       <div class="cta-buttons">
-        <a href="#" class="btn-filled"><i class="fa-solid fa-download"></i> <span data-i18n="btn_cv">Download CV</span></a>
+        <a href="#" class="btn-filled cv-download-trigger"><i class="fa-solid fa-download"></i> <span data-i18n="btn_cv">Download CV</span></a>
         <a href="mailto:haitam.tedbir@gmail.com" class="btn-outline"><i class="fa-solid fa-envelope"></i> <span data-i18n="btn_contact">Contact Me</span></a>
       </div>
     </div>
@@ -2038,6 +2145,38 @@ img, svg, video {
     <span class="nav-label" data-i18n="nav_contact">Contact</span>
   </a>
 </nav>
+
+  <!-- ============ CV VERIFICATION MODAL ============ -->
+  <div id="cvModalOverlay" class="cv-modal-overlay">
+    <div class="cv-modal">
+      <button id="cvModalClose" class="cv-modal-close">&times;</button>
+
+      <!-- Étape 1 : email -->
+      <div id="cvStepEmail" class="cv-step">
+        <h3 data-i18n="cv_modal_title1">Email Verification</h3>
+        <p data-i18n="cv_modal_desc1">Enter your email, a verification code will be sent to you.</p>
+        <input type="email" id="cvEmailInput" placeholder="votre@email.com" required>
+        <button id="cvSendCodeBtn" class="cv-btn" data-i18n="cv_send_code">Send Code</button>
+        <p id="cvEmailError" class="cv-error"></p>
+      </div>
+
+      <!-- Étape 2 : code -->
+      <div id="cvStepCode" class="cv-step" style="display:none;">
+        <h3 data-i18n="cv_modal_title2">Enter the Code</h3>
+        <p><span data-i18n="cv_modal_desc2">A 6-digit code was sent to</span> <span id="cvEmailDisplay"></span>.</p>
+        <input type="text" id="cvCodeInput" maxlength="6" placeholder="------" required>
+        <button id="cvVerifyBtn" class="cv-btn" data-i18n="cv_verify_btn">Verify & Download</button>
+        <p id="cvCodeError" class="cv-error"></p>
+        <button id="cvResendBtn" class="cv-link-btn" data-i18n="cv_resend">Resend Code</button>
+      </div>
+
+      <!-- Étape 3 : succès -->
+      <div id="cvStepSuccess" class="cv-step" style="display:none;">
+        <h3 data-i18n="cv_success_title">✓ Verified</h3>
+        <p data-i18n="cv_success_desc">Your download is starting...</p>
+      </div>
+    </div>
+  </div>
 
   <script>
 
@@ -2221,12 +2360,17 @@ img, svg, video {
         contact_desc: "Discutons de la façon dont je peux contribuer à vos projets digitaux, IA et développement web.",
         footer_brand_text: "Étudiant en Digital & Intelligence Artificielle en Santé, passionné par la tech, l'IA et le développement web.",
         quick_links: "Liens Rapides",
-        nav_home: "Accueil",
-        nav_about: "À Propos",
-        nav_experience: "Expérience",
-        nav_formation: "Formation",
-        nav_contact: "Contact",
-        rights_reserved: "Tous droits réservés."
+        rights_reserved: "Tous droits réservés.",
+
+        cv_modal_title1: "Vérification par email",
+        cv_modal_desc1: "Entrez votre email, un code de vérification vous sera envoyé.",
+        cv_send_code: "Envoyer le code",
+        cv_modal_title2: "Entrez le code reçu",
+        cv_modal_desc2: "Un code à 6 chiffres a été envoyé à",
+        cv_verify_btn: "Vérifier et télécharger",
+        cv_resend: "Renvoyer le code",
+        cv_success_title: "✓ Vérifié",
+        cv_success_desc: "Le téléchargement démarre..."
       },
       en: {
         nav_home: "Home",
@@ -2326,12 +2470,17 @@ img, svg, video {
         contact_desc: "Let's talk about how I can contribute to your digital, AI, and web development projects.",
         footer_brand_text: "Student in Digital Engineering & AI in Healthcare, passionate about tech, AI, and web development.",
         quick_links: "Quick Links",
-        nav_home: "Home",
-        nav_about: "About",
-        nav_experience: "Experience",
-        nav_formation: "Education",
-        nav_contact: "Contact",
-        rights_reserved: "All rights reserved."
+        rights_reserved: "All rights reserved.",
+
+        cv_modal_title1: "Email Verification",
+        cv_modal_desc1: "Enter your email, a verification code will be sent to you.",
+        cv_send_code: "Send Code",
+        cv_modal_title2: "Enter the Code",
+        cv_modal_desc2: "A 6-digit code was sent to",
+        cv_verify_btn: "Verify & Download",
+        cv_resend: "Resend Code",
+        cv_success_title: "✓ Verified",
+        cv_success_desc: "Your download is starting..."
       }
     };
 
@@ -2357,10 +2506,131 @@ img, svg, video {
       const savedLang = localStorage.getItem("preferred_language") || "en";
       switchLanguage(savedLang);
     });
-  
+
     const savedLanguage = localStorage.getItem('portfolio-language') || 'en';
     switchLanguage(savedLanguage);
 </script>
+
+  <!-- ============ CV VERIFICATION LOGIC (EmailJS) ============ -->
+  <script>
+  /* ============================================================
+     ÉTAPES DE CONFIGURATION :
+     1) Crée un compte gratuit sur https://www.emailjs.com
+     2) Connecte ta boîte mail comme "Email Service" -> note le SERVICE_ID
+     3) Crée un "Email Template" avec les variables {{to_email}}
+        et {{code}} dans le corps -> note le TEMPLATE_ID
+     4) Dans Account > General, récupère ta "Public Key"
+     5) Remplace les 3 valeurs ci-dessous
+     ============================================================ */
+  const EMAILJS_PUBLIC_KEY = "MROrvTA37H5FqsSx5";
+  const EMAILJS_SERVICE_ID = "MROrvTA37H5FqsSx5";
+  const EMAILJS_TEMPLATE_ID = "template_t931cgv";
+
+  // Chemin vers ton fichier CV réel
+  const CV_FILE_PATH = "assets/CV_Haitam_Tedbir.pdf";
+  const CV_FILE_NAME = "CV_Haitam_Tedbir.pdf";
+
+  (function () {
+    const emailjsScript = document.createElement("script");
+    emailjsScript.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+    emailjsScript.onload = () => emailjs.init(MROrvTA37H5FqsSx5);
+    document.head.appendChild(emailjsScript);
+
+    let currentCode = null;
+
+    const overlay = document.getElementById("cvModalOverlay");
+    const stepEmail = document.getElementById("cvStepEmail");
+    const stepCode = document.getElementById("cvStepCode");
+    const stepSuccess = document.getElementById("cvStepSuccess");
+    const emailInput = document.getElementById("cvEmailInput");
+    const codeInput = document.getElementById("cvCodeInput");
+    const emailError = document.getElementById("cvEmailError");
+    const codeError = document.getElementById("cvCodeError");
+    const emailDisplay = document.getElementById("cvEmailDisplay");
+
+    function openModal() {
+      overlay.classList.add("active");
+      resetToStepEmail();
+    }
+
+    function closeModal() {
+      overlay.classList.remove("active");
+    }
+
+    function resetToStepEmail() {
+      stepEmail.style.display = "block";
+      stepCode.style.display = "none";
+      stepSuccess.style.display = "none";
+      emailInput.value = "";
+      codeInput.value = "";
+      emailError.textContent = "";
+      codeError.textContent = "";
+    }
+
+    function generateCode() {
+      return String(Math.floor(100000 + Math.random() * 900000));
+    }
+
+    async function sendCode() {
+      const email = emailInput.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailError.textContent = document.documentElement.lang === "fr" ? "Adresse email invalide." : "Invalid email address.";
+        return;
+      }
+      emailError.textContent = "";
+      currentCode = generateCode();
+
+      try {
+        await emailjs.send(MROrvTA37H5FqsSx5, template_t931cgv, {
+          to_email: email,
+          code: currentCode,
+        });
+        emailDisplay.textContent = email;
+        stepEmail.style.display = "none";
+        stepCode.style.display = "block";
+      } catch (err) {
+        emailError.textContent = document.documentElement.lang === "fr" ? "Erreur d'envoi. Réessayez." : "Send error. Try again.";
+        console.error(err);
+      }
+    }
+
+    function verifyCode() {
+      const entered = codeInput.value.trim();
+      if (entered !== currentCode) {
+        codeError.textContent = document.documentElement.lang === "fr" ? "Code incorrect." : "Incorrect code.";
+        return;
+      }
+      codeError.textContent = "";
+      stepCode.style.display = "none";
+      stepSuccess.style.display = "block";
+
+      const link = document.createElement("a");
+      link.href = CV_FILE_PATH;
+      link.download = CV_FILE_NAME;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setTimeout(closeModal, 1500);
+    }
+
+    document.getElementById("cvModalClose").addEventListener("click", closeModal);
+    document.getElementById("cvSendCodeBtn").addEventListener("click", sendCode);
+    document.getElementById("cvVerifyBtn").addEventListener("click", verifyCode);
+    document.getElementById("cvResendBtn").addEventListener("click", sendCode);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    // Les 2 boutons "Télécharger le CV" (hero + footer) ouvrent le modal
+    document.querySelectorAll(".cv-download-trigger").forEach((trigger) => {
+      trigger.addEventListener("click", function (e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+  })();
+  </script>
 
 </body>
 </html>
