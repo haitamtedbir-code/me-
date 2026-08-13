@@ -1715,8 +1715,407 @@ img, svg, video {
   min-height: 16px;
   margin-top: -4px;
 }
+
+
+/* ===================== MEDINOTE AI PROJECT ===================== */
+.project-preview.medinote {
+  background: linear-gradient(135deg, #eef4ff, #ffffff 52%, #eefaf6);
+  padding: 18px;
+}
+
+.project-preview.medinote .medinote-shot {
+  width: 92%;
+  height: 86%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 12px;
+  border: 1px solid rgba(66, 84, 180, .16);
+  box-shadow: 0 16px 35px rgba(36, 48, 105, .18);
+  background: #fff;
+  transition: transform .3s ease;
+}
+
+.project-card:hover .project-preview.medinote .medinote-shot {
+  transform: scale(1.025);
+}
+
+.project-preview.medinote .project-preview-icon {
+  width: 48px;
+  height: 48px;
+  right: 18px;
+  bottom: 15px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #4354c4, #4f9b86);
+  font-size: 1.1rem;
+}
+
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: 0 0 16px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(233,67,67,.14);
+  color: #e94343;
+  font-size: .76rem;
+  font-weight: 800;
+}
+
+.project-status::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: #e94343;
+}
+
+/* ===================== PROJECT WRITEUP MODAL ===================== */
+.project-modal-overlay {
+  position: fixed; inset: 0; z-index: 10000; display: none;
+  align-items: center; justify-content: center; padding: 24px;
+  background: rgba(0,0,0,.72); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
+}
+.project-modal-overlay.active { display: flex; }
+.project-modal {
+  position: relative; width: min(900px,100%); max-height: min(94vh,900px);
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--modal-bg); color: var(--text-main);
+  border: 1px solid var(--modal-border); border-right: 7px solid var(--accent);
+  border-radius: 10px; box-shadow: 0 30px 90px rgba(0,0,0,.42);
+  padding: 28px 24px 34px;
+  scrollbar-width: thin; scrollbar-color: var(--accent) var(--modal-scroll-track);
+}
+.project-modal::-webkit-scrollbar { width: 8px; }
+.project-modal::-webkit-scrollbar-track { background: var(--modal-scroll-track); }
+.project-modal::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 20px; }
+.project-modal::-webkit-scrollbar-thumb:hover { background: var(--accent-2); }
+.project-modal-close {
+  position: sticky; top: 0; float: right; z-index: 2; border: 0;
+  background: transparent; color: var(--text-body); font-size: 1.55rem;
+  line-height: 1; cursor: pointer; padding: 2px 4px;
+}
+.project-modal-close:hover { color: var(--accent); }
+.project-modal h2 { margin: 0 45px 22px 0; color: var(--accent); font-size: clamp(1.15rem,3vw,1.55rem); line-height: 1.35; }
+.project-modal-image {
+  width: 100%; max-height: 500px; object-fit: contain; object-position: center; display: block;
+  border-radius: 10px; background: var(--modal-image-bg); margin-bottom: 22px;
+}
+.project-modal-preview {
+  height: 300px; border-radius: 10px; margin-bottom: 22px; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--modal-preview-a), var(--modal-preview-b));
+  border: 1px solid var(--modal-border); color: var(--accent); font-size: 4rem;
+}
+.project-modal-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.35fr); gap: 28px; align-items: start; }
+.project-modal-section h3 { color: var(--accent); font-size: 1rem; margin: 0 0 12px; }
+.project-modal-desc { color: var(--text-body); line-height: 1.65; font-size: .9rem; margin-bottom: 22px; }
+.project-modal-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.project-modal-tag { display:inline-flex; padding:7px 11px; border-radius:999px; background:var(--accent-soft); color:var(--accent-text); border:1px solid var(--accent-border); font-size:.78rem; font-weight:700; }
+.project-modal-results { list-style:none; margin:0; padding:0; display:grid; gap:9px; }
+.project-modal-results li { position:relative; padding-left:21px; color:var(--text-body); font-size:.88rem; line-height:1.5; }
+.project-modal-results li::before { content:"✓"; position:absolute; left:0; color:var(--accent); font-weight:900; }
+body.dark-mode {
+  --modal-bg:#15171b; --modal-border:rgba(255,255,255,.08); --modal-scroll-track:#23252a; --modal-image-bg:#101218;
+  --modal-preview-a:#25272d; --modal-preview-b:#15171b; --accent-soft:rgba(233,67,67,.16); --accent-border:rgba(233,67,67,.25); --accent-text:#f0b1ad;
+}
+body:not(.dark-mode) {
+  --modal-bg:#ffffff; --modal-border:#e1e4e8; --modal-scroll-track:#f0f1f3; --modal-image-bg:#f5f6f8;
+  --modal-preview-a:#f8f9fb; --modal-preview-b:#eef1f5; --accent-soft:rgba(233,67,67,.09); --accent-border:rgba(233,67,67,.22); --accent-text:#a12e2b;
+}
+@media (max-width:650px) {
+  .project-modal-overlay { padding:10px; }
+  .project-modal { padding:22px 16px 28px; border-right-width:5px; }
+  .project-modal-grid { grid-template-columns:1fr; gap:22px; }
+  .project-modal-image, .project-modal-preview { max-height:330px; height:auto; min-height:210px; }
+}
+
+/* ===================== PROJECTS — CARD GRID STYLE ===================== */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+.project-card {
+  background: #202124;
+  border: 1px solid #34363a;
+  border-radius: 14px;
+  overflow: hidden;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 38px rgba(0,0,0,.28), 0 0 24px rgba(233,67,67,.10);
+}
+
+.project-preview {
+  position: relative;
+  height: 205px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+
+.project-preview::before,
+.project-preview::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(3px);
+  opacity: .55;
+  z-index: -1;
+}
+
+.project-preview::before {
+  width: 220px;
+  height: 220px;
+  background: rgba(233,67,67,.30);
+  top: -100px;
+  right: -60px;
+}
+
+.project-preview::after {
+  width: 180px;
+  height: 180px;
+  background: rgba(255,255,255,.08);
+  bottom: -100px;
+  left: -40px;
+}
+
+.project-preview.medipro {
+  background: linear-gradient(135deg, #30231d, #5a3027 55%, #1d2024);
+}
+
+.medipro-project-logo {
+  width: min(78%, 310px);
+  height: 175px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.22));
+}
+
+body:not(.dark-mode) .medipro-project-logo {
+  filter: drop-shadow(0 8px 18px rgba(24,55,90,.14));
+}
+
+@media (max-width: 600px) {
+  .medipro-project-logo { width: min(82%, 280px); height: 155px; }
+}
+
+.project-preview.healthcare {
+  background: linear-gradient(135deg, #192b31, #27484c 52%, #202124);
+}
+
+.project-preview.web {
+  background: linear-gradient(135deg, #24252d, #3b2b38 52%, #202124);
+}
+
+.project-window {
+  width: 76%;
+  height: 72%;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 12px;
+  background: rgba(15,16,18,.72);
+  box-shadow: 0 18px 45px rgba(0,0,0,.35);
+  padding: 15px;
+  transform: rotate(-2deg);
+}
+
+.project-window .window-bar {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.project-window .window-bar span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.45);
+}
+
+.project-window .window-line {
+  height: 8px;
+  border-radius: 5px;
+  background: rgba(255,255,255,.10);
+  margin: 8px 0;
+}
+
+.project-window .window-line.short { width: 55%; }
+.project-window .window-line.accent { background: rgba(233,67,67,.75); width: 72%; }
+
+.project-preview-icon {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: rgba(233,67,67,.96);
+  color: #fff;
+  font-size: 1.45rem;
+  box-shadow: 0 12px 30px rgba(0,0,0,.30);
+  z-index: 2;
+}
+
+.project-card-body {
+  padding: 24px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.project-card h3 {
+  font-size: 1.12rem;
+  line-height: 1.35;
+  margin-bottom: 12px;
+  color: #f3f4f5;
+}
+
+.project-link {
+  color: #9da3ab;
+  font-size: .78rem;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  margin-bottom: 22px;
+}
+
+.project-link:hover { color: var(--accent); }
+
+.project-label {
+  color: #9da3ab;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  margin-bottom: 10px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+
+.project-tag {
+  background: rgba(233,67,67,.16);
+  border: 1px solid rgba(233,67,67,.16);
+  color: #f0b1ad;
+  padding: 6px 9px;
+  border-radius: 5px;
+  font-size: .74rem;
+  font-weight: 700;
+}
+
+.project-results {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 22px;
+}
+
+.project-results li {
+  position: relative;
+  padding-left: 17px;
+  color: #aeb4bc;
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.project-results li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.project-writeup {
+  margin-top: auto;
+  min-height: 38px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid rgba(233,67,67,.55);
+  border-radius: 9px;
+  background: rgba(233,67,67,.13);
+  color: #f2a19d;
+  text-decoration: none;
+  font-size: .82rem;
+  font-weight: 700;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.project-writeup:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .project-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .project-preview { height: 185px; }
+  .project-card-body { padding: 20px 18px 18px; }
+}
+
+body:not(.dark-mode) .project-card {
+  background: #f8f9fb;
+  border-color: #e3e5e8;
+}
+
+body:not(.dark-mode) .project-card h3 { color: #17181a; }
+body:not(.dark-mode) .project-link,
+body:not(.dark-mode) .project-label,
+body:not(.dark-mode) .project-results li { color: #5f6670; }
+body:not(.dark-mode) .project-tag { color: #a12e2b; }
+body:not(.dark-mode) .project-preview.medipro { background: linear-gradient(135deg, #f7e9e6, #f4d8d4 55%, #eef1f4); }
+body:not(.dark-mode) .project-preview.healthcare { background: linear-gradient(135deg, #eaf4f5, #dceced 52%, #f1f3f5); }
+body:not(.dark-mode) .project-preview.web { background: linear-gradient(135deg, #f0f1f6, #f5e8ed 52%, #eef0f3); }
+body:not(.dark-mode) .project-window { background: rgba(255,255,255,.82); border-color: #d9dde2; box-shadow: 0 14px 35px rgba(30,35,40,.12); }
+body:not(.dark-mode) .project-window .window-bar span { background: #aeb5bd; }
+body:not(.dark-mode) .project-window .window-line { background: #e0e4e8; }
+body:not(.dark-mode) .project-preview::after { background: rgba(255,255,255,.55); }
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+.project-status.completed-status {
+  background: rgba(34, 197, 94, 0.14) !important;
+  color: #22c55e !important;
+  border-color: rgba(34, 197, 94, 0.28) !important;
+}
+
+/* MEDIPRO: Completed badge fully green */
+.project-status.completed-status {
+  background: #22c55e !important;
+  color: #ffffff !important;
+  border-color: #22c55e !important;
+}
+
+.project-status.completed-status::before {
+  background: #ffffff !important;
+}
+</style>
 </head>
 <body>
 
@@ -1792,7 +2191,7 @@ img, svg, video {
   <!-- ============ PAGE : À PROPOS / ABOUT ============ -->
   <section id="about" class="page">
     <div class="about-heading">
-      <h1 data-i18n="about_title_1">About <span data-i18n="about_title_2">Me</span></h1>
+      <h1 data-i18n="about_title">ABOUT</h1>
       <div class="underline"></div>
     </div>
 
@@ -1940,39 +2339,127 @@ img, svg, video {
       </p>
     </div>
 
-    <div class="cert-grid">
-      <div class="cert-card">
-        <div class="cert-icon cert-icon-ai">
-          <i class="fa-solid fa-file-contract"></i>
+    <div class="project-grid">
+      <article class="project-card medinote-project-card">
+        <div class="project-preview medinote">
+          <img class="medinote-shot" src="image/medinote-ai.png" alt="MediNOTE AI healthcare documentation interface">
+          <div class="project-preview-icon"><i class="fa-solid fa-notes-medical"></i></div>
         </div>
-        <h3 data-i18n="project1_title">MEDIPRO Public Procurement File</h3>
-        <p class="cert-issuer">MEDIPRO</p>
-        <p class="cert-desc" data-i18n="project1_desc">
-          Academic project focused on preparing and structuring a public procurement file.
-        </p>
-      </div>
+        <div class="project-card-body">
+          <span class="project-status" data-i18n="medinote_status">In Progress</span>
+          <h3 data-i18n="medinote_title">MediNOTE AI — Medical Documentation Assistant</h3>
+          <a class="project-link" href="#">AI &amp; Healthcare · Audio to Medical Notes</a>
+          <div class="project-label" data-i18n="tech_stack">TECH STACK</div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">AI</span>
+            <span class="project-tag">Speech-to-Text</span>
+            <span class="project-tag">NLP</span>
+            <span class="project-tag">Healthcare</span>
+            <span class="project-tag">Web App</span>
+          </div>
+          <div class="project-label" data-i18n="key_results">KEY RESULTS</div>
+          <ul class="project-results">
+            <li data-i18n="medinote_result1">Transforms consultation audio into structured medical notes</li>
+            <li data-i18n="medinote_result2">Reduces manual documentation time for healthcare professionals</li>
+            <li data-i18n="medinote_result3">Organizes clinical information into a clear and readable format</li>
+            <li data-i18n="medinote_result4">Designed with a simple and professional healthcare interface</li>
+            <li data-i18n="medinote_result5">Project focused on AI applied to digital healthcare</li>
+          </ul>
+          <a href="#" class="project-writeup" data-project="medinote"><i class="fa-solid fa-file-lines"></i> <span data-i18n="project_writeup">Project Writeup</span></a>
+        </div>
+      </article>
+      <article class="project-card">
+        <div class="project-preview medipro">
+          <img class="medipro-project-logo" src="image/medipro-logo.png" alt="MEDIPRO Équipement Médical SARL">
+        </div>
+        <div class="project-card-body">
+          <span class="project-status completed-status" data-i18n="medipro_status">Completed</span>
+          <h3 data-i18n="project1_title">MEDIPRO Public Procurement File</h3>
+          <a class="project-link" href="#">MEDIPRO · Academic Project</a>
+          <div class="project-label" data-i18n="tech_stack">TECH STACK</div>
+          <div class="project-tags">
+            <span class="project-tag" data-i18n="p1_tag1">Documentation</span>
+            <span class="project-tag" data-i18n="p1_tag2">Structuring</span>
+            <span class="project-tag" data-i18n="p1_tag3">Analysis</span>
+            <span class="project-tag" data-i18n="p1_tag4">Digital Workflow</span>
+          </div>
+          <div class="project-label" data-i18n="key_results">KEY RESULTS</div>
+          <ul class="project-results">
+            <li data-i18n="p1_result1">Preparation and structuring of the procurement file</li>
+            <li data-i18n="p1_result2">Clear organization of project documentation</li>
+            <li data-i18n="p1_result3">Structured information for easier review</li>
+            <li data-i18n="p1_result4">Academic project focused on digital organization</li>
+          </ul>
+          <a href="#" class="project-writeup" data-project="medipro"><i class="fa-solid fa-file-lines"></i> <span data-i18n="project_writeup">Project Writeup</span></a>
+        </div>
+      </article>
 
-      <div class="cert-card">
-        <div class="cert-icon cert-icon-google">
-          <i class="fa-solid fa-robot"></i>
+      <article class="project-card">
+        <div class="project-preview healthcare">
+          <div class="project-window">
+            <div class="window-bar"><span></span><span></span><span></span></div>
+            <div class="window-line accent"></div>
+            <div class="window-line short"></div>
+            <div class="window-line"></div>
+            <div class="window-line short"></div>
+          </div>
+          <div class="project-preview-icon"><i class="fa-solid fa-robot"></i></div>
         </div>
-        <h3 data-i18n="project2_title">Artificial Intelligence Solution</h3>
-        <p class="cert-issuer">AI &amp; Healthcare</p>
-        <p class="cert-desc" data-i18n="project2_desc">
-          Development of an artificial intelligence-based solution applied to healthcare.
-        </p>
-      </div>
+        <div class="project-card-body">
+          <span class="project-status" data-i18n="ai_status">In Progress</span>
+          <h3 data-i18n="project2_title">Artificial Intelligence Solution</h3>
+          <a class="project-link" href="#">AI &amp; Healthcare · Academic Project</a>
+          <div class="project-label" data-i18n="tech_stack">TECH STACK</div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">AI</span>
+            <span class="project-tag">Machine Learning</span>
+            <span class="project-tag">Healthcare</span>
+          </div>
+          <div class="project-label" data-i18n="key_results">KEY RESULTS</div>
+          <ul class="project-results">
+            <li data-i18n="p2_result1">Development of an AI-based healthcare solution</li>
+            <li data-i18n="p2_result2">Application of artificial intelligence to a health context</li>
+            <li data-i18n="p2_result3">Focus on practical digital healthcare use cases</li>
+            <li data-i18n="p2_result4">Academic work connecting AI and healthcare technologies</li>
+          </ul>
+          <a href="#" class="project-writeup" data-project="healthcare"><i class="fa-solid fa-file-lines"></i> <span data-i18n="project_writeup">Project Writeup</span></a>
+        </div>
+      </article>
 
-      <div class="cert-card">
-        <div class="cert-icon cert-icon-cisco">
-          <i class="fa-solid fa-code"></i>
+      <article class="project-card">
+        <div class="project-preview web">
+          <div class="project-window">
+            <div class="window-bar"><span></span><span></span><span></span></div>
+            <div class="window-line accent"></div>
+            <div class="window-line"></div>
+            <div class="window-line short"></div>
+            <div class="window-line"></div>
+          </div>
+          <div class="project-preview-icon"><i class="fa-solid fa-code"></i></div>
         </div>
-        <h3 data-i18n="project3_title">Responsive Web Development</h3>
-        <p class="cert-issuer">HTML · CSS · JavaScript</p>
-        <p class="cert-desc" data-i18n="project3_desc">
-          Design and development of modern responsive web interfaces with interactive features.
-        </p>
-      </div>
+        <div class="project-card-body">
+          <span class="project-status" data-i18n="web_status">In Progress</span>
+          <h3 data-i18n="project3_title">Responsive Web Development</h3>
+          <a class="project-link" href="#">HTML · CSS · JavaScript · Web Project</a>
+          <div class="project-label" data-i18n="tech_stack">TECH STACK</div>
+          <div class="project-tags">
+            <span class="project-tag">HTML5</span>
+            <span class="project-tag">CSS3</span>
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">Responsive Design</span>
+          </div>
+          <div class="project-label" data-i18n="key_results">KEY RESULTS</div>
+          <ul class="project-results">
+            <li data-i18n="p3_result1">Modern and responsive web interface</li>
+            <li data-i18n="p3_result2">Interactive client-side features</li>
+            <li data-i18n="p3_result3">Flexible layout for desktop and mobile</li>
+            <li data-i18n="p3_result4">Clean structure focused on user experience</li>
+          </ul>
+          <a href="#" class="project-writeup" data-project="web"><i class="fa-solid fa-file-lines"></i> <span data-i18n="project_writeup">Project Writeup</span></a>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -2038,7 +2525,7 @@ img, svg, video {
         <p class="cert-issuer">FutureLearn</p>
         <p class="cert-dates" data-i18n="cert1_dates">Jan. 2026 · Expires Jan. 2028</p>
         <p class="cert-desc" data-i18n="cert1_desc">Introduction to the fundamentals of artificial intelligence and its real-world applications.</p>
-        <a href="#" class="cert-view-btn" data-i18n="cert_view">View Certificate</a>
+        <a href="https://www.futurelearn.com/certificates/ofgw31e" class="cert-view-btn" data-i18n="cert_view">View Certificate</a>
       </div>
 
       <div class="cert-card">
@@ -2049,7 +2536,7 @@ img, svg, video {
         <p class="cert-issuer">Cisco</p>
         <p class="cert-dates" data-i18n="cert2_dates">Apr. 2026 · Expires Apr. 2028</p>
         <p class="cert-desc" data-i18n="cert2_desc">Overview of modern AI techniques and their applications in business.</p>
-        <a href="#" class="cert-view-btn" data-i18n="cert_view">View Certificate</a>
+        <a href="https://www.credly.com/badges/ba73a541-f85c-4072-88e8-1dc21e5f11e3/linked_in_profile" class="cert-view-btn" data-i18n="cert_view">View Certificate</a>
       </div>
 
       <div class="cert-card">
@@ -2060,7 +2547,7 @@ img, svg, video {
         <p class="cert-issuer">Google Digital Academy</p>
         <p class="cert-dates">Jan. 2026 · <span data-i18n="cert3_expires">Expires Jan. 2027</span> · ID 172239536</p>
         <p class="cert-desc" data-i18n="cert3_desc">Mastery of web analytics tools and digital performance tracking.</p>
-        <a href="#" class="cert-view-btn" data-i18n="cert_view">View Certificate</a>
+        <a href="https://skillshop.credential.net/0f797d5c-47bf-4755-afbd-2df945aa3dc5" class="cert-view-btn" data-i18n="cert_view">View Certificate</a>
       </div>
     </div>
   </section>
@@ -2147,6 +2634,26 @@ img, svg, video {
 </nav>
 
   <!-- ============ CV VERIFICATION MODAL ============ -->
+  <!-- ============ PROJECT WRITEUP MODAL (ALL PROJECTS) ============ -->
+  <div id="projectModalOverlay" class="project-modal-overlay" aria-hidden="true">
+    <div class="project-modal" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+      <button id="projectModalClose" class="project-modal-close" aria-label="Close">&times;</button>
+      <h2 id="projectModalTitle"></h2>
+      <div id="projectModalVisual"></div>
+      <p id="projectModalDesc" class="project-modal-desc"></p>
+      <div class="project-modal-grid">
+        <div class="project-modal-section">
+          <h3 id="projectModalStackTitle"></h3>
+          <div id="projectModalTags" class="project-modal-tags"></div>
+        </div>
+        <div class="project-modal-section">
+          <h3 id="projectModalResultsTitle"></h3>
+          <ul id="projectModalResults" class="project-modal-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="cvModalOverlay" class="cv-modal-overlay">
     <div class="cv-modal">
       <button id="cvModalClose" class="cv-modal-close">&times;</button>
@@ -2331,6 +2838,33 @@ img, svg, video {
         project2_desc: "Développement d'une solution basée sur l'intelligence artificielle appliquée au domaine de la santé.",
         project3_title: "Développement Web Responsive",
         project3_desc: "Conception et développement d'interfaces web modernes et responsives avec des fonctionnalités interactives.",
+        medinote_status: "En cours",
+        medipro_status: "Terminé",
+        ai_status: "En cours",
+        web_status: "En cours",
+        medinote_title: "MediNOTE AI — Assistant de Documentation Médicale",
+        medinote_modal_title: "MediNOTE AI — Assistant de Documentation Médicale - Documentation du projet",
+        medinote_result1: "Transforme l'audio d'une consultation en notes médicales structurées",
+        medinote_result2: "Réduit le temps consacré à la documentation manuelle pour les professionnels de santé",
+        medinote_result3: "Organise les informations cliniques dans un format clair et lisible",
+        medinote_result4: "Interface simple et professionnelle pensée pour le domaine de la santé",
+        medinote_result5: "Projet centré sur l'intelligence artificielle appliquée à la santé numérique",
+        tech_stack: "STACK TECHNIQUE",
+        key_results: "RÉSULTATS CLÉS",
+        project_writeup: "Documentation du projet",
+        p1_tag1: "Documentation", p1_tag2: "Structuration", p1_tag3: "Analyse", p1_tag4: "Flux numérique",
+        p1_result1: "Préparation et structuration du dossier de marché public",
+        p1_result2: "Organisation claire de la documentation du projet",
+        p1_result3: "Informations structurées pour faciliter la revue",
+        p1_result4: "Projet académique axé sur l'organisation numérique",
+        p2_result1: "Développement d'une solution basée sur l'IA appliquée à la santé",
+        p2_result2: "Application de l'intelligence artificielle dans un contexte de santé",
+        p2_result3: "Travail orienté vers des cas d'usage numériques en santé",
+        p2_result4: "Projet académique reliant IA et technologies de santé",
+        p3_result1: "Interface web moderne et responsive",
+        p3_result2: "Fonctionnalités interactives côté client",
+        p3_result3: "Mise en page adaptée au desktop et au mobile",
+        p3_result4: "Structure claire centrée sur l'expérience utilisateur",
 
         formation_title: "Formation & Certifications",
         formation_subtitle: "Un parcours académique solide et des certifications reconnues dans le domaine du digital et de l'intelligence artificielle.",
@@ -2440,6 +2974,33 @@ img, svg, video {
         project2_desc: "Development of an artificial intelligence-based solution applied to healthcare.",
         project3_title: "Responsive Web Development",
         project3_desc: "Design and development of modern responsive web interfaces with interactive features.",
+        medinote_status: "In Progress",
+        medipro_status: "Completed",
+        ai_status: "In Progress",
+        web_status: "In Progress",
+        medinote_title: "MediNOTE AI — Medical Documentation Assistant",
+        medinote_modal_title: "MediNOTE AI — Medical Documentation Assistant - Project Writeup",
+        medinote_result1: "Transforms consultation audio into structured medical notes",
+        medinote_result2: "Reduces manual documentation time for healthcare professionals",
+        medinote_result3: "Organizes clinical information into a clear and readable format",
+        medinote_result4: "Designed with a simple and professional healthcare interface",
+        medinote_result5: "Project focused on AI applied to digital healthcare",
+        tech_stack: "TECH STACK",
+        key_results: "KEY RESULTS",
+        project_writeup: "Project Writeup",
+        p1_tag1: "Documentation", p1_tag2: "Structuring", p1_tag3: "Analysis", p1_tag4: "Digital Workflow",
+        p1_result1: "Preparation and structuring of the procurement file",
+        p1_result2: "Clear organization of project documentation",
+        p1_result3: "Structured information for easier review",
+        p1_result4: "Academic project focused on digital organization",
+        p2_result1: "Development of an AI-based healthcare solution",
+        p2_result2: "Application of artificial intelligence to a health context",
+        p2_result3: "Focus on practical digital healthcare use cases",
+        p2_result4: "Academic work connecting AI and healthcare technologies",
+        p3_result1: "Modern and responsive web interface",
+        p3_result2: "Interactive client-side features",
+        p3_result3: "Flexible layout for desktop and mobile",
+        p3_result4: "Clean structure focused on user experience",
 
         formation_title: "Education & Certifications",
         formation_subtitle: "A solid academic background and recognized certifications in digital technology and artificial intelligence.",
@@ -2726,6 +3287,78 @@ img, svg, video {
       if (e.target === overlay) closeModal();
     });
 
+    // Project Writeup modal — all projects
+    (function () {
+      const overlay = document.getElementById("projectModalOverlay");
+      const closeBtn = document.getElementById("projectModalClose");
+      if (!overlay || !closeBtn) return;
+
+      const data = {
+        medinote: {
+          icon: "fa-notes-medical", image: "image/medinote-ai.png",
+          title: { fr: "MediNOTE AI — Assistant de Documentation Médicale", en: "MediNOTE AI — Medical Documentation Assistant" },
+          desc: { fr: "Solution basée sur l'intelligence artificielle qui transforme l'audio d'une consultation médicale en notes structurées.", en: "An AI-based solution that transforms medical consultation audio into structured notes." },
+          tags: ["Python","Artificial Intelligence","Speech-to-Text","NLP","Healthcare","Web App"],
+          results: { fr: ["Transforme l'audio d'une consultation en notes médicales structurées","Réduit le temps consacré à la documentation manuelle","Organise les informations cliniques dans un format clair et lisible","Interface simple et professionnelle pensée pour la santé numérique","Projet actuellement en cours de développement"], en: ["Transforms consultation audio into structured medical notes","Reduces manual documentation time","Organizes clinical information in a clear and readable format","Simple and professional healthcare interface","Project currently in development"] }
+        },
+        medipro: {
+          icon: "fa-file-contract", image: "image/medipro-logo.png",
+          title: { fr: "Dossier de marché public MEDIPRO", en: "MEDIPRO Public Procurement File" },
+          desc: { fr: "Projet académique consacré à la préparation et à la structuration d'un dossier de marché public.", en: "Academic project focused on preparing and structuring a public procurement file." },
+          tags: ["Documentation","Structuring","Analysis","Digital Workflow"],
+          results: { fr: ["Préparation et structuration du dossier de marché public","Organisation claire de la documentation du projet","Informations structurées pour faciliter la revue","Projet académique axé sur l'organisation numérique"], en: ["Preparation and structuring of the procurement file","Clear organization of project documentation","Structured information for easier review","Academic project focused on digital organization"] }
+        },
+        healthcare: {
+          icon: "fa-robot",
+          title: { fr: "Solution basée sur l'intelligence artificielle", en: "Artificial Intelligence Solution" },
+          desc: { fr: "Développement d'une solution basée sur l'intelligence artificielle appliquée au domaine de la santé.", en: "Development of an artificial intelligence-based solution applied to healthcare." },
+          tags: ["Python","AI","Machine Learning","Healthcare"],
+          results: { fr: ["Développement d'une solution basée sur l'IA appliquée à la santé","Application de l'intelligence artificielle dans un contexte de santé","Travail orienté vers des cas d'usage numériques en santé","Projet académique reliant IA et technologies de santé"], en: ["Development of an AI-based healthcare solution","Application of artificial intelligence to a health context","Focus on practical digital healthcare use cases","Academic work connecting AI and healthcare technologies"] }
+        },
+        web: {
+          icon: "fa-code",
+          title: { fr: "Développement Web Responsive", en: "Responsive Web Development" },
+          desc: { fr: "Conception et développement d'interfaces web modernes et responsives avec des fonctionnalités interactives.", en: "Design and development of modern responsive web interfaces with interactive features." },
+          tags: ["HTML5","CSS3","JavaScript","Responsive Design"],
+          results: { fr: ["Interface web moderne et responsive","Fonctionnalités interactives côté client","Mise en page adaptée au desktop et au mobile","Structure claire centrée sur l'expérience utilisateur"], en: ["Modern and responsive web interface","Interactive client-side features","Flexible layout for desktop and mobile","Clean structure focused on user experience"] }
+        }
+      };
+
+      function openProject(key) {
+        const project = data[key];
+        if (!project) return;
+        const lang = document.documentElement.lang === "fr" ? "fr" : "en";
+        document.getElementById("projectModalTitle").textContent = project.title[lang];
+        document.getElementById("projectModalDesc").textContent = project.desc[lang];
+        document.getElementById("projectModalStackTitle").textContent = lang === "fr" ? "STACK TECHNIQUE" : "TECH STACK";
+        document.getElementById("projectModalResultsTitle").textContent = lang === "fr" ? "RÉSULTATS CLÉS" : "KEY RESULTS";
+        const visual = document.getElementById("projectModalVisual");
+        if (project.image) {
+          visual.innerHTML = `<img class="project-modal-image" src="${project.image}" alt="${project.title[lang]}">`;
+        } else {
+          visual.innerHTML = `<div class="project-modal-preview"><i class="fa-solid ${project.icon}"></i></div>`;
+        }
+        document.getElementById("projectModalTags").innerHTML = project.tags.map(t => `<span class="project-modal-tag">${t}</span>`).join("");
+        document.getElementById("projectModalResults").innerHTML = project.results[lang].map(r => `<li>${r}</li>`).join("");
+        overlay.classList.add("active");
+        overlay.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeProject() {
+        overlay.classList.remove("active");
+        overlay.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      document.querySelectorAll(".project-writeup[data-project]").forEach(trigger => {
+        trigger.addEventListener("click", e => { e.preventDefault(); openProject(trigger.dataset.project); });
+      });
+      closeBtn.addEventListener("click", closeProject);
+      overlay.addEventListener("click", e => { if (e.target === overlay) closeProject(); });
+      document.addEventListener("keydown", e => { if (e.key === "Escape" && overlay.classList.contains("active")) closeProject(); });
+    })();
+
     // Les 2 boutons "Télécharger le CV" (hero + footer) ouvrent le modal
     document.querySelectorAll(".cv-download-trigger").forEach((trigger) => {
       trigger.addEventListener("click", function (e) {
@@ -2737,4 +3370,4 @@ img, svg, video {
   </script>
 
 </body>
-</html>g
+</html>
